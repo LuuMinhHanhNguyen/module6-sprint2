@@ -1,65 +1,84 @@
 import React from "react";
+import "../css/login.css";
 
 export default function LogIn() {
   return (
     <>
-      {/* ? Preloader Start */}
-      <div id="preloader-active">
-        <div className="preloader d-flex align-items-center justify-content-center">
-          <div className="preloader-inner position-relative">
-            <div className="preloader-circle" />
-            <div className="preloader-img pere-text">
-              <img src="assets/img/logo/loder.png" alt="" />
+      <div>
+        <div className="overlay-login">
+          {/* LOGN IN FORM by Omar Dsoky */}
+          <form className="form-login">
+            {/*   con = Container  for items in the form*/}
+            <div className="con">
+              {/*     Start  header Content  */}
+              <header className=" header-login">
+                <h2>Log In</h2>
+                {/*     A welcome message or an explanation of the login form */}
+                <p>login here using your username and password</p>
+              </header>
+              {/*     End  header Content  */}
+              <br />
+              <div className="field-set">
+                {/*   user name */}
+                <span className="input-item">
+                  <i className="fa fa-user-circle" />
+                </span>
+                {/*   user name Input*/}
+                <input
+                  className="form-input"
+                  id="txt-input"
+                  type="text"
+                  placeholder="@UserName"
+                  required=""
+                />
+                <br />
+                {/*   Password */}
+                <span className="input-item">
+                  <i className="fa fa-key" />
+                </span>
+                {/*   Password Input*/}
+                <input
+                  className="form-input"
+                  type="password"
+                  placeholder="Password"
+                  id="pwd"
+                  name="password"
+                  required=""
+                />
+                {/*      Show/hide password  */}
+                <span>
+                  <i
+                    className="fa fa-eye"
+                    aria-hidden="true"
+                    type="button"
+                    id="eye"
+                  />
+                </span>
+                <br />
+                {/*        buttons */}
+                {/*      button LogIn */}
+                <button className="button-login"> Log In </button>
+              </div>
+              {/*   other buttons */}
+              <div className="other">
+                {/*      Forgot Password button*/}
+                <button className="btn submits frgt-pass button-login">
+                  Forgot Password
+                </button>
+                {/*     Sign Up button */}
+                <button className="btn submits sign-up button-login">
+                  Sign Up
+                  {/*         Sign Up font icon */}
+                  <i className="fa fa-user-plus" aria-hidden="true" />
+                </button>
+                {/*      End Other the Division */}
+              </div>
+              {/*   End Conrainer  */}
             </div>
-          </div>
+            {/* End Form */}
+          </form>
         </div>
       </div>
-      {/* Preloader Start*/}
-      <main className="login-body" data-vide-bg="assets/img/login-bg.mp4">
-        {/* Login Admin */}
-        <form className="form-default" action="login-bg.mp4" method="POST">
-          <div className="login-form">
-            {/* logo-login */}
-            <div className="logo-login">
-              <a href="index.html">
-                <img src="assets/img/logo/loder.png" alt="" />
-              </a>
-            </div>
-            <h2>Login Here</h2>
-            <div className="form-input">
-              <label htmlFor="name">Email</label>
-              <input type="email" name="email" placeholder="Email" />
-            </div>
-            <div className="form-input">
-              <label htmlFor="name">Password</label>
-              <input type="password" name="password" placeholder="Password" />
-            </div>
-            <div className="form-input pt-30">
-              <input type="submit" name="submit" defaultValue="login" />
-            </div>
-            {/* Forget Password */}
-            <a href="#" className="forget">
-              Forget Password
-            </a>
-            {/* Forget Password */}
-            <a href="register.html" className="registration">
-              Registration
-            </a>
-          </div>
-        </form>
-        {/* /end login form */}
-      </main>
-      {/* Jquery, Popper, Bootstrap */}
-      {/* Jquery Mobile Menu */}
-      {/* Video bg */}
-      {/* Jquery Slick , Owl-Carousel Plugins */}
-      {/* One Page, Animated-HeadLin */}
-      {/* Date Picker */}
-      {/* Nice-select, sticky */}
-      {/* Progress */}
-      {/* counter , waypoint,Hover Direction */}
-      {/* contact js */}
-      {/* Jquery Plugins, main Jquery */}
     </>
   );
 }
