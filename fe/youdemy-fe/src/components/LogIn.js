@@ -7,7 +7,7 @@ export default function LogIn() {
       <div>
         <div className="overlay-login">
           {/* LOGN IN FORM by Omar Dsoky */}
-          <form className="form-login">
+          <form className="form-login m-0">
             {/*   con = Container  for items in the form*/}
             <div className="con">
               {/*     Start  header Content  */}

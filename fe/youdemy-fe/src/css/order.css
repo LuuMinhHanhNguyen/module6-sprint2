@@ -86,3 +86,18 @@
     top:70px;
    
 }
+.course-name {
+        display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+}
+.payment-btn{
+background: linear-gradient(90deg, #7c32ff 0%, #c738d8 100%);
+color: white;
+}
+.back-btn:hover{
+    background: linear-gradient(90deg, #7c32ff 0%, #c738d8 100%);
+        color: white;
+}

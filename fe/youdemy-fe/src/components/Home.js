@@ -14,7 +14,6 @@ import "react-multi-carousel/lib/styles.css";
 import { Navigation, Autoplay, EffectCoverflow } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-
 import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
@@ -47,6 +46,50 @@ export default function Home() {
       <Header />
 
       <section className="pt-5 mt-5">
+        <div id="carouselExample" className="carousel slide">
+          <div className="carousel-inner">
+            <div className="carousel-item active" style={{ height: "550px" }}>
+              <img
+                src="https://img-c.udemycdn.com/notices/featured_carousel_slide/image/923f23af-3510-4aea-8599-92e79b0b7dca.jpg"
+                className="d-block w-100"
+                alt="..."
+              />
+            </div>
+            <div className="carousel-item" style={{ height: "550px" }}>
+              <img
+                src="https://www.fastinfoclass.com/blogs/asset/upload/feature_images/Importance_of_English_Speaking_Course_copy.jpg"
+                className="d-block w-100"
+                alt="..."
+              />
+            </div>
+            <div className="carousel-item" style={{ height: "550px" }}>
+              <img
+                src="https://treecampus.in/wp-content/uploads/2022/09/1.png"
+                className="d-block w-100"
+                alt="..."
+              />
+            </div>
+          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="prev"
+          >
+            <span className="carousel-control-prev-icon" aria-hidden="true" />
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="next"
+          >
+            <span className="carousel-control-next-icon" aria-hidden="true" />
+            <span className="visually-hidden">Next</span>
+          </button>
+        </div>
+
         <div className=" each-kind my-0">
           <h2 className="px-5 my-0">Essential TOEIC Coursed</h2>
           <Carousel responsive={responsive}>
@@ -56,41 +99,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -100,41 +128,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -144,41 +157,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -188,41 +186,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -232,41 +215,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -276,41 +244,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -320,41 +273,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -370,43 +308,25 @@ export default function Home() {
               <div className="details px-1">
                 <a href="#">
                   <h5>
-                    Learn Angular JS Course for Legendary Persons Learn Angular
-                    JS Course for Legendary Persons
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
                   </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -416,41 +336,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -460,41 +365,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -504,41 +394,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -548,41 +423,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -592,41 +452,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -636,41 +481,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -685,41 +515,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -729,41 +544,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -773,41 +573,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -817,41 +602,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -861,41 +631,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -905,41 +660,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>
@@ -949,41 +689,26 @@ export default function Home() {
               </div>
               <div className="details px-1">
                 <a href="#">
-                  <h4>Learn Angular JS Course for Legendary Persons</h4>
+                  <h5>
+                    Learn Angular JS Course for Legendary Persons Legendary
+                    Persons Learn Angular JS Course for Legendary Persons
+                  </h5>
                 </a>
-                <div className="d-flex justify-content-between mb-20">
+                <div className="d-flex flex-column justify-content-between">
                   <p className="name">Dan Hauer</p>
-                  <p className="value">$150</p>
+                  <p className="value m-0">$150</p>
                 </div>
-                <div className="bottom d-flex align-items-baseline mt-15">
-                  <ul className="list">
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i className="fa fa-star" />
-                      </a>
-                    </li>
-                  </ul>
-                  <p className="ml-20">25 Reviews</p>
+                <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                  <small className="star">
+                    4.2 <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star checked text-warning" />
+                    <i className="fa fa-star" />
+                    <i className="fa fa-star" /> (2277 ratings)
+                  </small>
+                  <small className="d-inline-block">
+                    77 lectures • All levels • 25 Reviews
+                  </small>
                 </div>
               </div>
             </div>

@@ -3178,3 +3178,8 @@ h5 {
   text-overflow: ellipsis;
 }
 
+.right-contents >* {
+  text-decoration: none;
+
+}
+

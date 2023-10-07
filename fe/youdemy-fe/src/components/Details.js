@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import Rating from "react-rating";
 
 export default function Details() {
   return (

@@ -12,66 +12,24 @@ export default function Cart() {
       <Header />
       <div id="hannah" className="pb-5 pt-5">
         <div className="container-fluid p-1 position-relative">
-          <h1 className="text-center my-5 mx-auto" style={{ color: "#0340c1" }}>
+          <h1
+            className="text-center my-5 mx-auto fw-bold"
+            style={{ color: "#0340c1" }}
+          >
             Shopping Cart
           </h1>
 
           <div className="container-fluid w-100">
             <div className="row">
               <div className=" col col-sm-12 col-md-12 col-lg-8 col-xl-8 p-0">
-                <div className=" d-flex justify-content-end">
-                  <button
-                    type="button"
-                    className="btn mx-5 p-0 text-primary"
-                    style={{
-                      cursor: "pointer",
-                      fontSize: "14px",
-                    }}
-                    // onClick={handleCheckedAll}
-                  >
-                    Select All
-                  </button>
-                  <button
-                    type="button"
-                    className="btn mx-5 p-0 text-primary"
-                    style={{
-                      cursor: "pointer",
-                      fontSize: "14px",
-                    }}
-                    // onClick={handleDelete}
-                  >
-                    Delete
-                  </button>
-                </div>
                 <div className=" d-flex flex-column justify-content-center align-items-center">
                   <table className="table table-hover">
-                    <thead className="text-secondary">
-                      <tr className="text-center fw-bold">
-                        <td>Course</td>
-                        <td>Author</td>
-                        <td>Number Of Lectures</td>
-                        <td>Total</td>
-                      </tr>
-                    </thead>
                     <tbody>
                       <tr
                       //   key={`el_${el.cartId}`}
                       >
                         <td>
                           <div className="d-flex flex-column flex-md-row align-items-center justify-content-start ">
-                            <span>
-                              <input
-                                // id={`el_${el.cartId}`}
-                                type="checkbox"
-                                name="multiSelect"
-                                style={{
-                                  width: "15px",
-                                  height: "15px",
-                                  marginRight: "20px",
-                                }}
-                                // onChange={() => handleMultiSelect(el)}
-                              />
-                            </span>
                             <img
                               src="https://www.pharmacity.vn/images/poom-happy.png"
                               style={{
@@ -83,35 +41,332 @@ export default function Cart() {
                               //     navigate(`/details/${el.medicineId}`)
                               //   }
                             />
-                            <div
-                              style={{ cursor: "pointer" }}
-                              className="text-center align-middle mx-2"
-                              //   onClick={() =>
-                              //     navigate(`/details/${el.medicineId}`)
-                              //   }
-                            >
-                              <div>
-                                The Complete Android 14 Developer Course - Build
-                                100 Apps
-                              </div>
-                            </div>
                           </div>
                         </td>
 
                         <td className=" text-center align-middle fw-bold">
-                          Dan Hauer
+                          <div
+                            style={{ cursor: "pointer" }}
+                            className=" d-flex flex-column align-items-start justify-content-center mx-2"
+                            //   onClick={() =>
+                            //     navigate(`/details/${el.medicineId}`)
+                            //   }
+                          >
+                            <p className="m-0">
+                              The Complete Android 14 Developer Course - Build
+                              100 Apps
+                            </p>
+                            <small>Dan Hauer</small>
+                            <small className="star">
+                              4.2{" "}
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star" />
+                              <i className="fa fa-star" /> (2277 ratings)
+                            </small>
+                            <small>77 lectures • All levels</small>
+                          </div>
                         </td>
                         {/*                            quantity*/}
-                        <td className="align-middle">22</td>
+                        <td className="align-middle">
+                          {" "}
+                          <button
+                            type="button"
+                            className="btn mx-5 p-0 "
+                            style={{
+                              cursor: "pointer",
+                              fontSize: "14px",
+                              color: "#1b41a7",
+                            }}
+                            // onClick={handleDelete}
+                          >
+                            Remove
+                          </button>
+                        </td>
                         {/*                            total price*/}
-                        <td className="align-middle text-center fw-bold">
-                          $15
+                        <td
+                          className="align-middle text-center fw-bold"
+                          style={{ color: "#9435f3" }}
+                        >
+                          $15.99
+                        </td>
+                      </tr>
+                      <tr
+                      //   key={`el_${el.cartId}`}
+                      >
+                        <td>
+                          <div className="d-flex flex-column flex-md-row align-items-center justify-content-start ">
+                            <img
+                              src="https://www.pharmacity.vn/images/poom-happy.png"
+                              style={{
+                                width: "5rem",
+                                height: "5rem",
+                                cursor: "pointer",
+                              }}
+                              //   onClick={() =>
+                              //     navigate(`/details/${el.medicineId}`)
+                              //   }
+                            />
+                          </div>
+                        </td>
+
+                        <td className=" text-center align-middle fw-bold">
+                          <div
+                            style={{ cursor: "pointer" }}
+                            className=" d-flex flex-column align-items-start justify-content-center mx-2"
+                            //   onClick={() =>
+                            //     navigate(`/details/${el.medicineId}`)
+                            //   }
+                          >
+                            <p className="m-0">
+                              The Complete Android 14 Developer Course - Build
+                              100 Apps
+                            </p>
+                            <small>Dan Hauer</small>
+                            <small className="star">
+                              4.2{" "}
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star" />
+                              <i className="fa fa-star" /> (2277 ratings)
+                            </small>
+                            <small>77 lectures • All levels</small>
+                          </div>
+                        </td>
+                        {/*                            quantity*/}
+                        <td className="align-middle">
+                          {" "}
+                          <button
+                            type="button"
+                            className="btn mx-5 p-0 "
+                            style={{
+                              cursor: "pointer",
+                              fontSize: "14px",
+                              color: "#1b41a7",
+                            }}
+                            // onClick={handleDelete}
+                          >
+                            Remove
+                          </button>
+                        </td>
+                        {/*                            total price*/}
+                        <td
+                          className="align-middle text-center fw-bold"
+                          style={{ color: "#9435f3" }}
+                        >
+                          $15.99
+                        </td>
+                      </tr>
+                      <tr
+                      //   key={`el_${el.cartId}`}
+                      >
+                        <td>
+                          <div className="d-flex flex-column flex-md-row align-items-center justify-content-start ">
+                            <img
+                              src="https://www.pharmacity.vn/images/poom-happy.png"
+                              style={{
+                                width: "5rem",
+                                height: "5rem",
+                                cursor: "pointer",
+                              }}
+                              //   onClick={() =>
+                              //     navigate(`/details/${el.medicineId}`)
+                              //   }
+                            />
+                          </div>
+                        </td>
+
+                        <td className=" text-center align-middle fw-bold">
+                          <div
+                            style={{ cursor: "pointer" }}
+                            className=" d-flex flex-column align-items-start justify-content-center mx-2"
+                            //   onClick={() =>
+                            //     navigate(`/details/${el.medicineId}`)
+                            //   }
+                          >
+                            <p className="m-0">
+                              The Complete Android 14 Developer Course - Build
+                              100 Apps
+                            </p>
+                            <small>Dan Hauer</small>
+                            <small className="star">
+                              4.2{" "}
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star" />
+                              <i className="fa fa-star" /> (2277 ratings)
+                            </small>
+                            <small>77 lectures • All levels</small>
+                          </div>
+                        </td>
+                        {/*                            quantity*/}
+                        <td className="align-middle">
+                          {" "}
+                          <button
+                            type="button"
+                            className="btn mx-5 p-0 "
+                            style={{
+                              cursor: "pointer",
+                              fontSize: "14px",
+                              color: "#1b41a7",
+                            }}
+                            // onClick={handleDelete}
+                          >
+                            Remove
+                          </button>
+                        </td>
+                        {/*                            total price*/}
+                        <td
+                          className="align-middle text-center fw-bold"
+                          style={{ color: "#9435f3" }}
+                        >
+                          $15.99
+                        </td>
+                      </tr>
+                      <tr
+                      //   key={`el_${el.cartId}`}
+                      >
+                        <td>
+                          <div className="d-flex flex-column flex-md-row align-items-center justify-content-start ">
+                            <img
+                              src="https://www.pharmacity.vn/images/poom-happy.png"
+                              style={{
+                                width: "5rem",
+                                height: "5rem",
+                                cursor: "pointer",
+                              }}
+                              //   onClick={() =>
+                              //     navigate(`/details/${el.medicineId}`)
+                              //   }
+                            />
+                          </div>
+                        </td>
+
+                        <td className=" text-center align-middle fw-bold">
+                          <div
+                            style={{ cursor: "pointer" }}
+                            className=" d-flex flex-column align-items-start justify-content-center mx-2"
+                            //   onClick={() =>
+                            //     navigate(`/details/${el.medicineId}`)
+                            //   }
+                          >
+                            <p className="m-0">
+                              The Complete Android 14 Developer Course - Build
+                              100 Apps
+                            </p>
+                            <small>Dan Hauer</small>
+                            <small className="star">
+                              4.2{" "}
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star" />
+                              <i className="fa fa-star" /> (2277 ratings)
+                            </small>
+                            <small>77 lectures • All levels</small>
+                          </div>
+                        </td>
+                        {/*                            quantity*/}
+                        <td className="align-middle">
+                          {" "}
+                          <button
+                            type="button"
+                            className="btn mx-5 p-0 "
+                            style={{
+                              cursor: "pointer",
+                              fontSize: "14px",
+                              color: "#1b41a7",
+                            }}
+                            // onClick={handleDelete}
+                          >
+                            Remove
+                          </button>
+                        </td>
+                        {/*                            total price*/}
+                        <td
+                          className="align-middle text-center fw-bold"
+                          style={{ color: "#9435f3" }}
+                        >
+                          $15.99
+                        </td>
+                      </tr>
+                      <tr
+                      //   key={`el_${el.cartId}`}
+                      >
+                        <td>
+                          <div className="d-flex flex-column flex-md-row align-items-center justify-content-start ">
+                            <img
+                              src="https://www.pharmacity.vn/images/poom-happy.png"
+                              style={{
+                                width: "5rem",
+                                height: "5rem",
+                                cursor: "pointer",
+                              }}
+                              //   onClick={() =>
+                              //     navigate(`/details/${el.medicineId}`)
+                              //   }
+                            />
+                          </div>
+                        </td>
+
+                        <td className=" text-center align-middle fw-bold">
+                          <div
+                            style={{ cursor: "pointer" }}
+                            className=" d-flex flex-column align-items-start justify-content-center mx-2"
+                            //   onClick={() =>
+                            //     navigate(`/details/${el.medicineId}`)
+                            //   }
+                          >
+                            <p className="m-0">
+                              The Complete Android 14 Developer Course - Build
+                              100 Apps
+                            </p>
+                            <small>Dan Hauer</small>
+                            <small className="star">
+                              4.2{" "}
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star checked text-warning" />
+                              <i className="fa fa-star" />
+                              <i className="fa fa-star" /> (2277 ratings)
+                            </small>
+                            <small>77 lectures • All levels</small>
+                          </div>
+                        </td>
+                        {/*                            quantity*/}
+                        <td className="align-middle">
+                          {" "}
+                          <button
+                            type="button"
+                            className="btn mx-5 p-0 "
+                            style={{
+                              cursor: "pointer",
+                              fontSize: "14px",
+                              color: "#1b41a7",
+                            }}
+                            // onClick={handleDelete}
+                          >
+                            Remove
+                          </button>
+                        </td>
+                        {/*                            total price*/}
+                        <td
+                          className="align-middle text-center fw-bold"
+                          style={{ color: "#9435f3" }}
+                        >
+                          $15.99
                         </td>
                       </tr>
                     </tbody>
                   </table>
 
-                  <Link to="/home" className="btn btn-outline-primary mb-5">
+                  <Link
+                    to="/home"
+                    className="btn btn-outline-primary mb-5 back-btn"
+                  >
                     ← Back to Home
                   </Link>
                 </div>
@@ -125,12 +380,13 @@ export default function Cart() {
                       <div className="border-bottom mb-2 pb-2">
                         <span className=" fw-bold">SUB TOTAL:</span>
                         <span className="fw-bold" style={{ float: "right" }}>
-                          {/* {currency(totalPrice)} VNĐ */}
+                          $222.99
                         </span>
                       </div>
                     </div>
                     <button
-                      className="w-100 btn btn-warning mt-3 fw-bold"
+                      className="w-100 btn payment-btn mt-3 fw-bold"
+                      style={{ color: "white" }}
                       //   onClick={proceedOrder}
                       //   disabled={showCf}
                     >

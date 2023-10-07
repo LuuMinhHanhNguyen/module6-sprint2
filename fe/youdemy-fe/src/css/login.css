@@ -11,16 +11,24 @@
 
 /* Start body rules */
 .overlay-login {
-    margin-top: -7rem;
-
-    font-family: 'Vibur', cursive;
-    /*   the main font */
+    
+font-family: 'Vibur', cursive;
     font-family: 'Abel', sans-serif;
-    opacity: .95; 
-    background-image: linear-gradient( #d9afd9 0%, #97d9e1 );
+    opacity: .95;
+    background-image: linear-gradient(#d9afd9 0%, #97d9e1);
     height: 100vh;
+    position: relative;
 
 }
+.form-login{
+            position: absolute;
+            top: 50%;
+            left: 50%;     
+            transform: translate(-50%, -50%);   
+            
+}
+
+
 
 
 
