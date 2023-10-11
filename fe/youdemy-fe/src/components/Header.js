@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FiShoppingCart } from "react-icons/fi";
+import { FiShoppingCart, FiUser } from "react-icons/fi";
 import "../css/header.css";
+import { getAppUserInfoFromJwtToken } from "../service/LogInService";
 
 export default function Header() {
+  const [appUser, setAppUser] = useState({});
+
+  const extractToken = () => {
+    console.log("heheheh");
+    const temp = getAppUserInfoFromJwtToken();
+    if (temp !== null) {
+      console.log("hi");
+      console.log(temp.appUser);
+      setAppUser(temp.appUser);
+    }
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("JWT");
+    setAppUser({});
+  };
+
+  useEffect(() => {
+    extractToken();
+  }, []);
+
   return (
     <>
       <header className="default-header" style={{ height: "70px" }}>
@@ -72,9 +94,39 @@ export default function Header() {
                     </a>
                   </div>
                 </li>
-                <li>
-                  <a href="contacts.html">Contacts</a>
+
+                <li className="dropdown">
+                  <Link
+                    to="/log-in"
+                    href=""
+                    className="header-btn header-cart position-relative dropdown-toggle link-login"
+                    data-toggle="dropdown"
+                  >
+                    <FiUser style={{ width: "25px", height: "25px" }} />
+                    {appUser.id && (
+                      <small className=" fw-bold w-50 ">
+                        {appUser.userName}
+                      </small>
+                    )}
+                  </Link>
+                  {appUser.userName && (
+                    <>
+                      <div className="dropdown-menu">
+                        <a className="dropdown-item" href="blog-home.html">
+                          Profile
+                        </a>
+                        <Link
+                          type="button"
+                          onClick={handleLogOut}
+                          className="dropdown-item"
+                        >
+                          Log Out
+                        </Link>
+                      </div>
+                    </>
+                  )}
                 </li>
+
                 <li>
                   <Link
                     to="/cart"

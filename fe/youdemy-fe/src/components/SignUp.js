@@ -1,26 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import "../css/login.css";
 import { Form, Formik, ErrorMessage, Field } from "formik";
 import * as yup from "yup";
 import { useNavigate, Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import {
   login,
+  signup,
   addJwtTokenToLocalStorage,
   getAppUserInfoFromJwtToken,
 } from "../service/LogInService";
 
-export default function LogIn() {
+export default function SignUp() {
   const navigate = useNavigate();
-  const [err, setErr] = useState(null);
 
-  const handleLogIn = async (values) => {
-    console.log("hrerere");
-    const data = await login(values);
-    if (data.data.token == null) {
-      setErr(":))");
+  const handleSignUp = async (values, setErrors) => {
+    const tempRole = {
+      id: 1,
+      flagDeleted: "false",
+      name: "ROLE_STUDENT",
+    };
+    const data = await signup({
+      userName: values.userName,
+      password: values.password,
+      appRole: tempRole,
+    });
+    console.log(data);
+    if (data.data.token === null) {
+      setErrors({ userName: "Cannot use this username!!" });
     } else {
+      Swal.fire("New account is successfully created!", "", "success");
+      console.log(data.data.token);
       addJwtTokenToLocalStorage(data.data.token);
-      console.log(getAppUserInfoFromJwtToken(data.data.token));
       navigate("/");
     }
   };
@@ -32,12 +43,17 @@ export default function LogIn() {
           initialValues={{
             userName: "",
             password: "",
+            passwordConfirmation: "",
           }}
           validationSchema={yup.object({
             userName: yup.string().required("Please fill in username!"),
             password: yup.string().required("Password is required!"),
+            passwordConfirmation: yup
+              .string()
+              .oneOf([yup.ref("password"), null], "Password must match!")
+              .required("Password Confirmation is required!"),
           })}
-          onSubmit={(values) => handleLogIn(values)}
+          onSubmit={(values, { setErrors }) => handleSignUp(values, setErrors)}
         >
           <div className="overlay-login">
             {/* LOGN IN FORM by Omar Dsoky */}
@@ -47,9 +63,9 @@ export default function LogIn() {
               <div className="con">
                 {/*     Start  header Content  */}
                 <header className=" header-login">
-                  <h2>Log In</h2>
+                  <h2>Sign Up</h2>
                   {/*     A welcome message or an explanation of the login form */}
-                  <p>login here using your username and password</p>
+                  <p>Sign Up here using your username and password</p>
                 </header>
                 {/*     End  header Content  */}
                 <br />
@@ -93,34 +109,41 @@ export default function LogIn() {
                       className=" text-danger d-block"
                     ></ErrorMessage>
                   </div>
-                  {err !== null && (
-                    <div>
-                      <small className=" text-danger">
-                        Username or password is not correct!
-                      </small>
-                    </div>
-                  )}
+                  <div>
+                    {/*   Confirm Password */}
+                    <span className="input-item">
+                      <i className="fa fa-key" />
+                    </span>
+                    {/*   Password Input*/}
+                    <Field
+                      className="form-input"
+                      type="password"
+                      placeholder="Confirm Password"
+                      name="passwordConfirmation"
+                    />
+
+                    {/*      Show/hide password  */}
+
+                    <ErrorMessage
+                      name="passwordConfirmation"
+                      component="small"
+                      className=" text-danger d-block"
+                    ></ErrorMessage>
+                  </div>
 
                   {/*        buttons */}
                   {/*      button LogIn */}
                   <button type="submit" className="button-login">
                     {" "}
-                    Log In{" "}
+                    Sign Up{" "}
                   </button>
                   <div className="other">
-                    {/*      Forgot Password button*/}
-                    <button
-                      className="btn submits frgt-pass button-login"
-                      type="button"
-                    >
-                      Forgot Password
-                    </button>
                     {/*     Sign Up button */}
                     <Link
-                      className="btn submits sign-up button-login"
-                      to="/sign-up"
+                      className="btn submits sign-up button-login w-100"
+                      to="/log-in"
                     >
-                      Sign Up
+                      Log In
                       {/*         Sign Up font icon */}
                       <i className="fa fa-user-plus" aria-hidden="true" />
                     </Link>

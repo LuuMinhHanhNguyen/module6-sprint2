@@ -11,16 +11,17 @@ import "../css/main.css";
 
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Navigation, Autoplay, EffectCoverflow } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 import Header from "./Header";
 import Footer from "./Footer";
 import { Link } from "react-router-dom";
 import ANH from "../img/popular-course/p1.jpg";
-import "../js/swiper";
+import {getAppUserInfoFromJwtToken} from "../service/LogInService"
 
 export default function Home() {
+
+  
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
