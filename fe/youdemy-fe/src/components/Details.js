@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Rating from "react-rating";
+import { useParams } from "react-router-dom";
+import { getAllVideos } from "../service/VideoService";
 
 export default function Details() {
+  const { id } = useParams();
+  const [videos, setVideos] = useState([]);
+
+  const loadAllVideos = async () => {
+    const data = await getAllVideos(id);
+    setVideos(data);
+    console.log(videos);
+  };
+
+  useEffect(() => {
+    loadAllVideos();
+  }, []);
+
+  console.log("hihfvfvfvi");
+  console.log(id);
+
   return (
     <>
       <Header />

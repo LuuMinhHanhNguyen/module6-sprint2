@@ -31,6 +31,8 @@ public class WebSecurityConfig {
                 .antMatchers(
                         //All role
                         "/api/auth/**",
+                        "/courses/**",
+                        "/videos/**",
                         "/check"
 
                 ).permitAll()

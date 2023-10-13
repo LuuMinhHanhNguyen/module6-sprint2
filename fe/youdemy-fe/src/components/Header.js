@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import "../css/header.css";
 import { getAppUserInfoFromJwtToken } from "../service/LogInService";
+import logo from "../logo-theRedoc.png";
 
 export default function Header() {
   const [appUser, setAppUser] = useState({});
@@ -31,9 +32,9 @@ export default function Header() {
       <header className="default-header" style={{ height: "70px" }}>
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container">
-            <a className="navbar-brand" href="index.html">
-              <img src="img/logo.png" alt="" />
-            </a>
+            <div className="p-0 m-0" style={{ width: "70px" }}>
+              <img src={logo} className="w-100" alt="" />
+            </div>
             <button
               className="navbar-toggler"
               type="button"
@@ -46,27 +47,43 @@ export default function Header() {
               <span className="lnr lnr-menu" />
             </button>
             <div
-              className="collapse navbar-collapse justify-content-end align-items-center"
+              className="collapse navbar-collapse p-0 m-0 justify-content-end align-items-center"
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav">
                 <li>
-                  <a href="index.html">Home</a>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <a href="about.html">About</a>
+                  <a href="#">About</a>
                 </li>
-                <li>
-                  <a href="courses.html">Courses</a>
-                </li>
+
                 {/* Dropdown */}
+
                 <li className="dropdown">
                   <a
                     className="dropdown-toggle"
                     href="#"
                     data-toggle="dropdown"
                   >
-                    Pages
+                    Categories
+                  </a>
+                  <div className="dropdown-menu">
+                    <a className="dropdown-item" href="blog-home.html">
+                      Categories 1
+                    </a>
+                    <a className="dropdown-item" href="blog-single.html">
+                      Categories 2
+                    </a>
+                  </div>
+                </li>
+                <li className="dropdown">
+                  <a
+                    className="dropdown-toggle"
+                    href="#"
+                    data-toggle="dropdown"
+                  >
+                    Courses
                   </a>
                   <div className="dropdown-menu">
                     <a className="dropdown-item" href="elements.html">
@@ -77,27 +94,13 @@ export default function Header() {
                     </a>
                   </div>
                 </li>
-                <li className="dropdown">
-                  <a
-                    className="dropdown-toggle"
-                    href="#"
-                    data-toggle="dropdown"
-                  >
-                    Blog
-                  </a>
-                  <div className="dropdown-menu">
-                    <a className="dropdown-item" href="blog-home.html">
-                      Blog Home
-                    </a>
-                    <a className="dropdown-item" href="blog-single.html">
-                      Blog Details
-                    </a>
-                  </div>
+                <li>
+                  <a href="#">My Learning</a>
                 </li>
 
                 <li className="dropdown">
                   <Link
-                    to="/log-in"
+                    to={appUser.id ? "#" : "/log-in"}
                     href=""
                     className="header-btn header-cart position-relative dropdown-toggle link-login"
                     data-toggle="dropdown"

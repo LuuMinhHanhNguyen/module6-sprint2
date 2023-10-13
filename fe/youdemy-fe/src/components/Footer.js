@@ -112,10 +112,10 @@ export default function Footer() {
           <div className="footer-bottom row align-items-center">
             <p className="footer-text m-0 col-lg-8 col-md-12">
               {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
-              Copyright © All rights reserved | This template is made with{" "}
+              Copyright © All rights reserved | This website is made with{" "}
               <i className="fa fa-heart-o" aria-hidden="true" /> by{" "}
               <a href="https://colorlib.com" target="_blank">
-                Colorlib
+                HannahLuuNG
               </a>
               {/* Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. */}
             </p>
