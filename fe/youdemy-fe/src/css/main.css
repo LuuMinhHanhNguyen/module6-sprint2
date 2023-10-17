@@ -3186,4 +3186,9 @@ h5 {
 .custom-pointer:hover{
   cursor: pointer !important;
 }
+.toast-position {
+  top: 7rem !important;
+  
+}
+
 

@@ -1,12 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
 import "../css/header.css";
 import { getAppUserInfoFromJwtToken } from "../service/LogInService";
+import { getCourseTypes } from "../service/CourseTypeService";
+import { AiOutlineHeart } from "react-icons/ai";
+import { HashLink } from "react-router-hash-link";
 import logo from "../logo-theRedoc.png";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { findAllCarts } from "../redux/cartAction";
 
 export default function Header() {
   const [appUser, setAppUser] = useState({});
+  const [courseTypes, setCourseTypes] = useState([]);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  const carts = useSelector((state) => state.cartReducer);
 
   const extractToken = () => {
     console.log("heheheh");
@@ -15,16 +26,32 @@ export default function Header() {
       console.log("hi");
       console.log(temp.appUser);
       setAppUser(temp.appUser);
+      dispatch(findAllCarts(temp.appUser.id));
     }
+  };
+
+  const loadCourseTypes = async () => {
+    const data = await getCourseTypes();
+    setCourseTypes(data);
   };
 
   const handleLogOut = () => {
     localStorage.removeItem("JWT");
     setAppUser({});
+
+    Swal.fire({
+      icon: "success",
+      title: "Successfully loged out!.",
+      showConfirmButton: true,
+      timer: "3000",
+    });
+    navigate("/");
+    window.location.reload();
   };
 
   useEffect(() => {
     extractToken();
+    loadCourseTypes();
   }, []);
 
   return (
@@ -60,22 +87,10 @@ export default function Header() {
 
                 {/* Dropdown */}
 
-                <li className="dropdown">
-                  <a
-                    className="dropdown-toggle"
-                    href="#"
-                    data-toggle="dropdown"
-                  >
-                    Categories
-                  </a>
-                  <div className="dropdown-menu">
-                    <a className="dropdown-item" href="blog-home.html">
-                      Categories 1
-                    </a>
-                    <a className="dropdown-item" href="blog-single.html">
-                      Categories 2
-                    </a>
-                  </div>
+                <li>
+                  <Link to="/favorites" className=" d-flex align-items-center">
+                    Favorites <AiOutlineHeart className="mx-1"></AiOutlineHeart>
+                  </Link>
                 </li>
                 <li className="dropdown">
                   <a
@@ -85,17 +100,25 @@ export default function Header() {
                   >
                     Courses
                   </a>
+
                   <div className="dropdown-menu">
-                    <a className="dropdown-item" href="elements.html">
-                      Elements
-                    </a>
-                    <a className="dropdown-item" href="course-details.html">
-                      Course Details
-                    </a>
+                    {courseTypes.length > 0 &&
+                      courseTypes.map((el) => {
+                        return (
+                          <HashLink
+                            key={`el-${el.id}`}
+                            className="dropdown-item"
+                            smooth={true}
+                            to={`/#${el.name}`}
+                          >
+                            {el.name}
+                          </HashLink>
+                        );
+                      })}
                   </div>
                 </li>
                 <li>
-                  <a href="#">My Learning</a>
+                  <Link to="/my-learning">My Learning</Link>
                 </li>
 
                 <li className="dropdown">
@@ -115,16 +138,16 @@ export default function Header() {
                   {appUser.userName && (
                     <>
                       <div className="dropdown-menu">
-                        <a className="dropdown-item" href="blog-home.html">
+                        <button className="dropdown-item fw-bolder text-uppercase">
                           Profile
-                        </a>
-                        <Link
+                        </button>
+                        <button
                           type="button"
                           onClick={handleLogOut}
-                          className="dropdown-item"
+                          className="dropdown-item fw-bolder text-uppercase"
                         >
                           Log Out
-                        </Link>
+                        </button>
                       </div>
                     </>
                   )}
@@ -137,7 +160,7 @@ export default function Header() {
                     className="header-btn header-cart position-relative"
                   >
                     <FiShoppingCart style={{ width: "25px", height: "25px" }} />
-                    <span className="cart-number">7</span>
+                    <span className="cart-number">{carts.length}</span>
                   </Link>
                 </li>
               </ul>

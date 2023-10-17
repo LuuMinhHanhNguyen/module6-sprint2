@@ -33,13 +33,19 @@ public class WebSecurityConfig {
                         "/api/auth/**",
                         "/courses/**",
                         "/videos/**",
+                        "/carts/**",
+                        "/courseTypes",
+                        "/favorites/**",
+                        "/purchases/**",
+                        "/comments/all",
                         "/check"
 
                 ).permitAll()
                 .antMatchers(
 
                         "/api/students/**",
-                        "/api/instructors/**"
+                        "/api/instructors/**",
+                        "/comments/review"
 
                 ).hasAnyAuthority("ROLE_INSTRUCTOR", "ROLE_STUDENT")
 

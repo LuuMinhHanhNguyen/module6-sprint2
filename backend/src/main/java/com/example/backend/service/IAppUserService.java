@@ -1,7 +1,9 @@
 package com.example.backend.service;
 
+import com.example.backend.model.AppUser;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public interface IAppUserService {
-//    UserDetails loadUserByUsername(String username);
+
+    AppUser findById(Long id);
 }

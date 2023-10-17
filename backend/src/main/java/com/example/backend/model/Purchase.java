@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name = "purchases")
 public class Purchase {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(name = "purchaseDate")
@@ -17,7 +18,17 @@ public class Purchase {
     @ManyToOne
     private Course course;
 
+    private Double price;
+
+
     public Purchase() {
+    }
+
+    public Purchase(String purchaseDate, AppUser appUser, Course course, Double price) {
+        this.purchaseDate = purchaseDate;
+        this.appUser = appUser;
+        this.course = course;
+        this.price = price;
     }
 
     public String getPurchaseDate() {
@@ -50,5 +61,13 @@ public class Purchase {
 
     public Long getId() {
         return id;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }

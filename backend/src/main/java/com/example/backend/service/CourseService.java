@@ -16,4 +16,9 @@ public class CourseService implements ICourseService{
     public List<Course> getAllCourse() {
         return iCourseRepository.findAll();
     }
+
+    @Override
+    public Course findCourse(Long id) {
+        return iCourseRepository.findById(id).get();
+    }
 }

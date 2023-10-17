@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @CrossOrigin
@@ -22,4 +23,10 @@ public class CourseController {
     public ResponseEntity getAll(){
         return new ResponseEntity<>(iCourseService.getAllCourse(), HttpStatus.OK);
     }
+
+    @GetMapping("/details")
+    public ResponseEntity getCourse(@RequestParam("courseId") Long courseId){
+        return new ResponseEntity<>(iCourseService.findCourse(courseId), HttpStatus.OK);
+    }
+
 }

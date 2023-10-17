@@ -1,6 +1,5 @@
 package com.example.backend.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
@@ -17,6 +16,11 @@ public class Cart {
     private Course course;
 
     public Cart() {
+    }
+
+    public Cart(AppUser appUser, Course course) {
+        this.appUser = appUser;
+        this.course = course;
     }
 
     public AppUser getAppUser() {

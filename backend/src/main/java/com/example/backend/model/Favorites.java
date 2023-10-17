@@ -1,12 +1,11 @@
 package com.example.backend.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Favorite {
+public class Favorites {
     @Id
     private Long id;
     @ManyToOne
@@ -15,7 +14,7 @@ public class Favorite {
     @ManyToOne
     private Course course;
 
-    public Favorite() {
+    public Favorites() {
     }
 
     public AppUser getAppUser() {

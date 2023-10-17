@@ -1,5 +1,5 @@
-create database youdemy;
-use youdemy;
+create database thecoach;
+use thecoach;
 
 create table app_role(
 id bigint auto_increment primary key,
@@ -43,9 +43,9 @@ name varchar(255)
 
 CREATE TABLE courses (
     id bigint auto_increment primary key,
-    name VARCHAR(100),
+    name text,
     image longtext,
-    description TEXT,
+    `description` longtext,
     price double,
     app_user_id bigint,
     course_type_id bigint,
@@ -56,19 +56,19 @@ CREATE TABLE courses (
 CREATE TABLE videos (
     id bigint auto_increment primary key,
     course_id bigint,
-    title VARCHAR(100),
-    urlPath VARCHAR(255),
+    title text,
+    url_path longtext,
     is_free BIT, 
     FOREIGN KEY (course_id) REFERENCES courses(id)
 );
 
 CREATE TABLE comments (
     id bigint auto_increment primary key,
-    video_id bigint,
+    course_id bigint,
     app_user_id bigint,
     comment_text longtext,
-    comment_date DATE,
-    FOREIGN KEY (video_id) REFERENCES videos(id),
+    comment_date varchar(255),
+    FOREIGN KEY (course_id) REFERENCES courses(id),
     FOREIGN KEY (app_user_id) REFERENCES app_user(id)
 );
 
@@ -76,7 +76,8 @@ CREATE TABLE purchases (
     id bigint auto_increment primary key,
     app_user_id bigint,
     course_id bigint,
-    purchase_date DATE,
+    purchase_date varchar(255),
+    price double,
     FOREIGN KEY (app_user_id) REFERENCES app_user(id),
     FOREIGN KEY (course_id) REFERENCES courses(id)
 );
@@ -91,11 +92,26 @@ CREATE TABLE cart (
 
 
 CREATE TABLE favorites (
+id bigint auto_increment primary key,
+    app_user_id bigint,
+    course_id bigint,
+    FOREIGN KEY (app_user_id) REFERENCES app_user(id),
+    FOREIGN KEY (course_id) REFERENCES courses(id)
+); 
+
+CREATE TABLE course_ratings (
+    id bigint auto_increment primary key,
+    rating_value int not null,
     app_user_id bigint,
     course_id bigint,
     FOREIGN KEY (app_user_id) REFERENCES app_user(id),
     FOREIGN KEY (course_id) REFERENCES courses(id)
 );
+
+
+-- drop database thecoach;
+
+
 
 
 

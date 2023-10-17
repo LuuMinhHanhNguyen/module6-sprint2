@@ -9,6 +9,8 @@ public class Video {
     private Long id;
 
     private String title;
+
+    @Column(name = "url_path")
     private String urlPath;
 
     @Column(name = "isFree")
