@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Comment;
+import com.example.backend.projection.RatingProjection;
 import com.example.backend.repository.ICommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class CommentService implements ICommentService{
     @Autowired
     private ICommentRepository iCommentRepository;
     @Override
-    public int saveComment(Long appUserId, Long courseId, String commentText) {
+    public int saveComment(Long appUserId, Long courseId, String commentText, int rating) {
         // get current date time
         LocalDateTime currentDateTime = LocalDateTime.now();
 
@@ -22,7 +23,7 @@ public class CommentService implements ICommentService{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
         String formattedDateTime = currentDateTime.format(formatter);
-        return iCommentRepository.saveComment(appUserId,courseId,commentText,formattedDateTime);
+        return iCommentRepository.saveComment(appUserId,courseId,commentText,formattedDateTime, rating);
     }
 
     @Override
@@ -33,6 +34,11 @@ public class CommentService implements ICommentService{
     @Override
     public boolean existsCommentByAppUser_IdAndCourse_Id(Long appUserId, Long courseId) {
         return iCommentRepository.existsCommentByAppUser_IdAndCourse_Id(appUserId,courseId);
+    }
+
+    @Override
+    public RatingProjection getAvgRatingByCourseId(Long courseId) {
+        return iCommentRepository.getAvgRatingByCourseId(courseId);
     }
 
 

@@ -1,5 +1,7 @@
 package com.example.backend.controller;
 
+import com.example.backend.projection.RatingDTO;
+import com.example.backend.projection.RatingProjection;
 import com.example.backend.service.ICommentService;
 import com.example.backend.service.IPurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @CrossOrigin("*")
@@ -20,18 +25,24 @@ public class CommentController {
 
     @GetMapping("/all")
     public ResponseEntity getAllComments(@RequestParam("courseId") Long courseId){
-        return new ResponseEntity<>(iCommentService.findAllByCourse_Id(courseId), HttpStatus.OK);
+        Map<String,Object> map = new HashMap<>();
+        RatingProjection temp = iCommentService.getAvgRatingByCourseId(courseId);
+        map.put("comments", iCommentService.findAllByCourse_Id(courseId));
+        map.put("rating", new RatingDTO(temp.getNumOfRating() > 0 ? temp.getAverageRating() : 0, temp.getNumOfRating()));
+        System.out.println(map);
+        return new ResponseEntity<>(map, HttpStatus.OK);
     }
 
 
     @PostMapping("/review")
     public ResponseEntity saveReview(@RequestParam("appUserId") Long appUserId,
                                      @RequestParam("courseId") Long courseId,
-                                     @RequestParam("commentText") String commentText
+                                     @RequestParam("commentText") String commentText,
+                                     @RequestParam("rating") int rating
     ){
         if(iPurchaseService.existsPurchaseByAppUser_IdAndCourse_Id(appUserId, courseId)
                 && !iCommentService.existsCommentByAppUser_IdAndCourse_Id(appUserId,courseId)){
-            iCommentService.saveComment(appUserId,courseId,commentText);
+            iCommentService.saveComment(appUserId,courseId,commentText,rating);
             return new ResponseEntity<>( HttpStatus.OK);
         }
 
@@ -41,5 +52,7 @@ public class CommentController {
             return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 
     }
+
+
 
 }

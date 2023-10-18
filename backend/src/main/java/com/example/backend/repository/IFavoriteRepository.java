@@ -2,6 +2,7 @@ package com.example.backend.repository;
 
 import com.example.backend.model.Cart;
 import com.example.backend.model.Favorites;
+import com.example.backend.projection.CourseProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +22,6 @@ public interface IFavoriteRepository extends JpaRepository<Favorites, Long> {
     int addToFavorites(Long appUserId, Long courseId);
 
     Favorites findByAppUser_IdAndCourse_Id(Long appUserId, Long courseId);
+
+
 }

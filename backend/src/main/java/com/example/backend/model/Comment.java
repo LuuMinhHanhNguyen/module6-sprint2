@@ -14,6 +14,8 @@ public class Comment {
     @Column(name = "commentDate")
     private String commentDate;
 
+    private int rating;
+
     @ManyToOne
     private Course course;
 
@@ -21,6 +23,14 @@ public class Comment {
     private AppUser appUser;
 
     public Comment() {
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public String getCommentText() {

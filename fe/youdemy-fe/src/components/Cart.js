@@ -9,6 +9,7 @@ import Footer from "./Footer";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { findAllCarts } from "../redux/cartAction";
+import ReactStars from "react-rating-stars-component";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -18,7 +19,12 @@ export default function Cart() {
   const [isUpdated, setIsUpdated] = useState(false);
   const [checkout, setCheckout] = useState(false);
   const dispatch = useDispatch();
-  
+
+  const firstExample = {
+    size: 15,
+    activeColor: "#f4ab20",
+    edit: false,
+  };
 
   const extractToken = async () => {
     const temp = getAppUserInfoFromJwtToken();
@@ -117,7 +123,10 @@ export default function Cart() {
   }, []);
 
   useEffect(() => {
-    let newTotalPrice = cart.reduce((total, el) => total + el.course.price, 0);
+    let newTotalPrice = cart.reduce(
+      (total, el) => total + el.cart.course.price,
+      0
+    );
 
     setTotalPrice(newTotalPrice);
   }, [cart]);
@@ -130,7 +139,7 @@ export default function Cart() {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <div id="hannah" className="pb-5 pt-5">
         <div className="container-fluid p-1 px-3 position-relative">
           <h1
@@ -155,18 +164,20 @@ export default function Cart() {
                         {cart.map((el) => {
                           return (
                             <>
-                              <tr key={`el_${el.id}`}>
+                              <tr key={`el_${el.cart.id}`}>
                                 <td>
-                                  <div className="d-flex flex-column flex-md-row align-items-center justify-content-start ">
+                                  <div className="d-flex flex-column flex-md-row align-items-center justify-content-start">
                                     <img
-                                      src={el.course.image}
+                                      src={el.cart.course.image}
                                       style={{
                                         width: "5rem",
                                         height: "5rem",
                                         cursor: "pointer",
                                       }}
                                       onClick={() =>
-                                        navigate(`/details/${el.course.id}`)
+                                        navigate(
+                                          `/details/${el.cart.course.id}`
+                                        )
                                       }
                                     />
                                   </div>
@@ -177,21 +188,35 @@ export default function Cart() {
                                     style={{ cursor: "pointer" }}
                                     className=" d-flex flex-column align-items-start justify-content-center mx-2"
                                     onClick={() =>
-                                      navigate(`/details/${el.course.id}`)
+                                      navigate(`/details/${el.cart.course.id}`)
                                     }
                                   >
-                                    <p className="m-0">{el.course.name}</p>
-                                    <small>{el.course.appUser.userName}</small>
-                                    <small className="star">
-                                      4.2{" "}
-                                      <i className="fa fa-star checked text-warning" />
-                                      <i className="fa fa-star checked text-warning" />
-                                      <i className="fa fa-star checked text-warning" />
-                                      <i className="fa fa-star" />
-                                      <i className="fa fa-star" /> (2277
-                                      ratings)
+                                    <p className="m-0">{el.cart.course.name}</p>
+                                    <small>
+                                      {el.cart.course.appUser.userName}
                                     </small>
-                                    <small>77 lectures • All levels</small>
+                                    <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
+                                      <small className="star d-flex align-items-center">
+                                        {el.numOfRating > 0
+                                          ? Number.parseFloat(
+                                              el.averageRating
+                                            ).toFixed(1)
+                                          : ""}
+                                        <ReactStars
+                                          key={el.averageRating}
+                                          value={el.averageRating}
+                                          {...firstExample}
+                                        />
+                                        ({el.numOfRating} ratings)
+                                      </small>
+                                      <small className="d-inline-block">
+                                        {el.numOfVideo} lectures • All levels •{" "}
+                                        {el.numOfStudent}{" "}
+                                        {el.numOfStudent > 1
+                                          ? "students"
+                                          : "student"}
+                                      </small>
+                                    </div>
                                   </div>
                                 </td>
 
@@ -204,7 +229,7 @@ export default function Cart() {
                                       fontSize: "14px",
                                       color: "#1b41a7",
                                     }}
-                                    onClick={() => handleDelete(el)}
+                                    onClick={() => handleDelete(el.cart)}
                                   >
                                     Remove
                                   </button>
@@ -214,7 +239,7 @@ export default function Cart() {
                                   className="align-middle text-center fw-bold"
                                   style={{ color: "#9435f3" }}
                                 >
-                                  ${el.course.price}
+                                  ${el.cart.course.price}
                                 </td>
                               </tr>
                             </>
@@ -281,7 +306,7 @@ export default function Cart() {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

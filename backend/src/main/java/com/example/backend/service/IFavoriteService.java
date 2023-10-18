@@ -1,12 +1,13 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Favorites;
+import com.example.backend.projection.FavoriteDTO;
 
 import java.util.List;
 
 public interface IFavoriteService {
 
-    List<Favorites> findAllByAppUserId(Long appUserId);
+    List<FavoriteDTO> findByAppUserId(Long appUserId);
 
     int addToFavorites(Long appUserId, Long courseId);
 

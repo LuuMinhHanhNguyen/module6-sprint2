@@ -23,6 +23,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { findAllCarts } from "../redux/cartAction";
+import ReactStars from "react-rating-stars-component";
 
 export default function Home() {
   const [courses, setCourses] = useState([]);
@@ -32,6 +33,12 @@ export default function Home() {
   const [isUpdated, setIsUpdated] = useState(false);
   const [myCourses, setMyCourses] = useState([]);
   const dispatch = useDispatch();
+
+  const firstExample = {
+    size: 15,
+    activeColor: "#f4ab20",
+    edit: false,
+  };
 
   const extractToken = () => {
     console.log("heheheh");
@@ -129,7 +136,7 @@ export default function Home() {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
 
       <section className="pt-5 mt-4">
         <div
@@ -185,11 +192,11 @@ export default function Home() {
           <Carousel responsive={responsive}>
             {courses.length > 0 &&
               courses
-                .filter((temp) => temp.courseType.name == "IELTS")
+                .filter((temp) => temp.course.courseType.name == "IELTS")
                 .map((el) => {
                   return (
                     <div
-                      key={`el-${el.id}`}
+                      key={`el-${el.course.id}`}
                       className="single-popular-course py-5 mb-3"
                       style={{ width: "270px" }}
                     >
@@ -198,62 +205,72 @@ export default function Home() {
                           style={{ height: "200px" }}
                           className=" d-flex justify-content-center"
                         >
-                          <Link to={`/details/${el.id}`}>
+                          <Link to={`/details/${el.course.id}`}>
                             <img
                               className=" w-100 h-100 mx-auto col"
-                              src={el.image}
+                              src={el.course.image}
                               alt=""
                             />
                           </Link>
                         </div>
                       </div>
                       <div className="details pb-3 px-1">
-                        <Link to={`/details/${el.id}`}>
+                        <Link to={`/details/${el.course.id}`}>
                           <h5 className=" fw-bolder">
-                            {el.name} - Learn {el.courseType.name} Course Online
+                            {el.course.name} - Learn {el.course.courseType.name}{" "}
+                            Course Online
                           </h5>
                         </Link>
                         <div className="d-flex flex-column justify-content-between">
-                          <p className="name">{el.appUser.userName}</p>
-                          <p className="value m-0">$ {el.price}</p>
+                          <p className="name">{el.course.appUser.userName}</p>
+                          <p className="value m-0">$ {el.course.price}</p>
                         </div>
                         <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
-                          <small className="star">
-                            4.2{" "}
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" /> (2277 ratings)
+                          <small className="star d-flex align-items-center">
+                            {el.numOfRating > 0
+                              ? Number.parseFloat(el.averageRating).toFixed(1)
+                              : ""}
+                            <ReactStars
+                              key={el.averageRating}
+                              value={el.averageRating}
+                              {...firstExample}
+                            />
+                            ({el.numOfRating} ratings)
                           </small>
                           <small className="d-inline-block">
-                            77 lectures • All levels • 25 Reviews
+                            {el.numOfVideo} lectures • All levels •{" "}
+                            {el.numOfStudent}{" "}
+                            {el.numOfStudent > 1 ? "students" : "student"}
                           </small>
                         </div>
                         <div className="mt-3 mb-0 d-flex justify-content-between align-items-center">
-                          {myCourses.find((temp) => temp.course.id == el.id) ? (
+                          {myCourses.find(
+                            (temp) => temp.purchase.course.id == el.course.id
+                          ) ? (
                             <Link
                               className=" btn btn-outline-primary back-btn w-75"
-                              to={`/details/${el.id}`}
+                              to={`/details/${el.course.id}`}
                             >
                               Go To Course →
                             </Link>
                           ) : (
                             <button
                               className=" btn btn-outline-success w-75"
-                              onClick={() => handleAddToCart(el.id)}
+                              onClick={() => handleAddToCart(el.course.id)}
                             >
                               Add to Cart
                             </button>
                           )}
-                          {favorites.find((temp) => temp.course.id == el.id) ? (
+                          {favorites.find(
+                            (temp) => temp.favorites.course.id == el.course.id
+                          ) ? (
                             <AiFillHeart
                               style={{
                                 width: "20px",
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiFillHeart>
                           ) : (
                             <AiOutlineHeart
@@ -262,7 +279,7 @@ export default function Home() {
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiOutlineHeart>
                           )}
                         </div>
@@ -278,11 +295,11 @@ export default function Home() {
           <Carousel responsive={responsive}>
             {courses.length > 0 &&
               courses
-                .filter((temp) => temp.courseType.name == "TOEIC")
+                .filter((temp) => temp.course.courseType.name == "TOEIC")
                 .map((el) => {
                   return (
                     <div
-                      key={`el-${el.id}`}
+                      key={`el-${el.course.id}`}
                       className="single-popular-course py-5 mb-3"
                       style={{ width: "270px" }}
                     >
@@ -291,62 +308,72 @@ export default function Home() {
                           style={{ height: "200px" }}
                           className=" d-flex justify-content-center"
                         >
-                          <Link to={`/details/${el.id}`}>
+                          <Link to={`/details/${el.course.id}`}>
                             <img
                               className=" w-100 h-100 mx-auto col"
-                              src={el.image}
+                              src={el.course.image}
                               alt=""
                             />
                           </Link>
                         </div>
                       </div>
                       <div className="details pb-3 px-1">
-                        <Link to={`/details/${el.id}`}>
+                        <Link to={`/details/${el.course.id}`}>
                           <h5 className=" fw-bolder">
-                            {el.name} - Learn {el.courseType.name} Course Online
+                            {el.course.name} - Learn {el.course.courseType.name}{" "}
+                            Course Online
                           </h5>
                         </Link>
                         <div className="d-flex flex-column justify-content-between">
-                          <p className="name">{el.appUser.userName}</p>
-                          <p className="value m-0">$ {el.price}</p>
+                          <p className="name">{el.course.appUser.userName}</p>
+                          <p className="value m-0">$ {el.course.price}</p>
                         </div>
                         <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
-                          <small className="star">
-                            4.2{" "}
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" /> (2277 ratings)
+                          <small className="star d-flex align-items-center">
+                            {el.numOfRating > 0
+                              ? Number.parseFloat(el.averageRating).toFixed(1)
+                              : ""}
+                            <ReactStars
+                              key={el.averageRating}
+                              value={el.averageRating}
+                              {...firstExample}
+                            />
+                            ({el.numOfRating} ratings)
                           </small>
                           <small className="d-inline-block">
-                            77 lectures • All levels • 25 Reviews
+                            {el.numOfVideo} lectures • All levels •{" "}
+                            {el.numOfStudent}{" "}
+                            {el.numOfStudent > 1 ? "students" : "student"}
                           </small>
                         </div>
                         <div className="mt-3 mb-0 d-flex justify-content-between align-items-center">
-                          {myCourses.find((temp) => temp.course.id == el.id) ? (
+                          {myCourses.find(
+                            (temp) => temp.purchase.course.id == el.course.id
+                          ) ? (
                             <Link
                               className=" btn btn-outline-primary back-btn w-75"
-                              to={`/details/${el.id}`}
+                              to={`/details/${el.course.id}`}
                             >
                               Go To Course →
                             </Link>
                           ) : (
                             <button
                               className=" btn btn-outline-success w-75"
-                              onClick={() => handleAddToCart(el.id)}
+                              onClick={() => handleAddToCart(el.course.id)}
                             >
                               Add to Cart
                             </button>
                           )}
-                          {favorites.find((temp) => temp.course.id == el.id) ? (
+                          {favorites.find(
+                            (temp) => temp.favorites.course.id == el.course.id
+                          ) ? (
                             <AiFillHeart
                               style={{
                                 width: "20px",
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiFillHeart>
                           ) : (
                             <AiOutlineHeart
@@ -355,7 +382,7 @@ export default function Home() {
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiOutlineHeart>
                           )}
                         </div>
@@ -371,11 +398,11 @@ export default function Home() {
           <Carousel responsive={responsive}>
             {courses.length > 0 &&
               courses
-                .filter((temp) => temp.courseType.name == "TOEFL")
+                .filter((temp) => temp.course.courseType.name == "TOEFL")
                 .map((el) => {
                   return (
                     <div
-                      key={`el-${el.id}`}
+                      key={`el-${el.course.id}`}
                       className="single-popular-course py-5 mb-3"
                       style={{ width: "270px" }}
                     >
@@ -384,62 +411,72 @@ export default function Home() {
                           style={{ height: "200px" }}
                           className=" d-flex justify-content-center"
                         >
-                          <Link to={`/details/${el.id}`}>
+                          <Link to={`/details/${el.course.id}`}>
                             <img
                               className=" w-100 h-100 mx-auto col"
-                              src={el.image}
+                              src={el.course.image}
                               alt=""
                             />
                           </Link>
                         </div>
                       </div>
                       <div className="details pb-3 px-1">
-                        <Link to={`/details/${el.id}`}>
+                        <Link to={`/details/${el.course.id}`}>
                           <h5 className=" fw-bolder">
-                            {el.name} - Learn {el.courseType.name} Course Online
+                            {el.course.name} - Learn {el.course.courseType.name}{" "}
+                            Course Online
                           </h5>
                         </Link>
                         <div className="d-flex flex-column justify-content-between">
-                          <p className="name">{el.appUser.userName}</p>
-                          <p className="value m-0">$ {el.price}</p>
+                          <p className="name">{el.course.appUser.userName}</p>
+                          <p className="value m-0">$ {el.course.price}</p>
                         </div>
                         <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
-                          <small className="star">
-                            4.2{" "}
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" /> (2277 ratings)
+                          <small className="star d-flex align-items-center">
+                            {el.numOfRating > 0
+                              ? Number.parseFloat(el.averageRating).toFixed(1)
+                              : ""}
+                            <ReactStars
+                              key={el.averageRating}
+                              value={el.averageRating}
+                              {...firstExample}
+                            />
+                            ({el.numOfRating} ratings)
                           </small>
                           <small className="d-inline-block">
-                            77 lectures • All levels • 25 Reviews
+                            {el.numOfVideo} lectures • All levels •{" "}
+                            {el.numOfStudent}{" "}
+                            {el.numOfStudent > 1 ? "students" : "student"}
                           </small>
                         </div>
                         <div className="mt-3 mb-0 d-flex justify-content-between align-items-center">
-                          {myCourses.find((temp) => temp.course.id == el.id) ? (
+                          {myCourses.find(
+                            (temp) => temp.purchase.course.id == el.course.id
+                          ) ? (
                             <Link
                               className=" btn btn-outline-primary back-btn w-75"
-                              to={`/details/${el.id}`}
+                              to={`/details/${el.course.id}`}
                             >
                               Go To Course →
                             </Link>
                           ) : (
                             <button
                               className=" btn btn-outline-success w-75"
-                              onClick={() => handleAddToCart(el.id)}
+                              onClick={() => handleAddToCart(el.course.id)}
                             >
                               Add to Cart
                             </button>
                           )}
-                          {favorites.find((temp) => temp.course.id == el.id) ? (
+                          {favorites.find(
+                            (temp) => temp.favorites.course.id == el.course.id
+                          ) ? (
                             <AiFillHeart
                               style={{
                                 width: "20px",
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiFillHeart>
                           ) : (
                             <AiOutlineHeart
@@ -448,7 +485,7 @@ export default function Home() {
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiOutlineHeart>
                           )}
                         </div>
@@ -466,11 +503,13 @@ export default function Home() {
           <Carousel responsive={responsive}>
             {courses.length > 0 &&
               courses
-                .filter((temp) => temp.courseType.name == "DAILY CONVERSATION")
+                .filter(
+                  (temp) => temp.course.courseType.name == "DAILY CONVERSATION"
+                )
                 .map((el) => {
                   return (
                     <div
-                      key={`el-${el.id}`}
+                      key={`el-${el.course.id}`}
                       className="single-popular-course py-5 mb-3"
                       style={{ width: "270px" }}
                     >
@@ -479,62 +518,72 @@ export default function Home() {
                           style={{ height: "200px" }}
                           className=" d-flex justify-content-center"
                         >
-                          <Link to={`/details/${el.id}`}>
+                          <Link to={`/details/${el.course.id}`}>
                             <img
                               className=" w-100 h-100 mx-auto col"
-                              src={el.image}
+                              src={el.course.image}
                               alt=""
                             />
                           </Link>
                         </div>
                       </div>
                       <div className="details pb-3 px-1">
-                        <Link to={`/details/${el.id}`}>
+                        <Link to={`/details/${el.course.id}`}>
                           <h5 className=" fw-bolder">
-                            {el.name} - Learn {el.courseType.name} Course Online
+                            {el.course.name} - Learn {el.course.courseType.name}{" "}
+                            Course Online
                           </h5>
                         </Link>
                         <div className="d-flex flex-column justify-content-between">
-                          <p className="name">{el.appUser.userName}</p>
-                          <p className="value m-0">$ {el.price}</p>
+                          <p className="name">{el.course.appUser.userName}</p>
+                          <p className="value m-0">$ {el.course.price}</p>
                         </div>
                         <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
-                          <small className="star">
-                            4.2{" "}
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" /> (2277 ratings)
+                          <small className="star d-flex align-items-center">
+                            {el.numOfRating > 0
+                              ? Number.parseFloat(el.averageRating).toFixed(1)
+                              : ""}
+                            <ReactStars
+                              key={el.averageRating}
+                              value={el.averageRating}
+                              {...firstExample}
+                            />
+                            ({el.numOfRating} ratings)
                           </small>
                           <small className="d-inline-block">
-                            77 lectures • All levels • 25 Reviews
+                            {el.numOfVideo} lectures • All levels •{" "}
+                            {el.numOfStudent}{" "}
+                            {el.numOfStudent > 1 ? "students" : "student"}
                           </small>
                         </div>
                         <div className="mt-3 mb-0 d-flex justify-content-between align-items-center">
-                          {myCourses.find((temp) => temp.course.id == el.id) ? (
+                          {myCourses.find(
+                            (temp) => temp.purchase.course.id == el.course.id
+                          ) ? (
                             <Link
                               className=" btn btn-outline-primary back-btn w-75"
-                              to={`/details/${el.id}`}
+                              to={`/details/${el.course.id}`}
                             >
                               Go To Course →
                             </Link>
                           ) : (
                             <button
                               className=" btn btn-outline-success w-75"
-                              onClick={() => handleAddToCart(el.id)}
+                              onClick={() => handleAddToCart(el.course.id)}
                             >
                               Add to Cart
                             </button>
                           )}
-                          {favorites.find((temp) => temp.course.id == el.id) ? (
+                          {favorites.find(
+                            (temp) => temp.favorites.course.id == el.course.id
+                          ) ? (
                             <AiFillHeart
                               style={{
                                 width: "20px",
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiFillHeart>
                           ) : (
                             <AiOutlineHeart
@@ -543,7 +592,7 @@ export default function Home() {
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiOutlineHeart>
                           )}
                         </div>
@@ -561,11 +610,13 @@ export default function Home() {
           <Carousel responsive={responsive}>
             {courses.length > 0 &&
               courses
-                .filter((temp) => temp.courseType.name == "ENGLISH SPEAKING")
+                .filter(
+                  (temp) => temp.course.courseType.name == "ENGLISH SPEAKING"
+                )
                 .map((el) => {
                   return (
                     <div
-                      key={`el-${el.id}`}
+                      key={`el-${el.course.id}`}
                       className="single-popular-course py-5 mb-3"
                       style={{ width: "270px" }}
                     >
@@ -574,62 +625,72 @@ export default function Home() {
                           style={{ height: "200px" }}
                           className=" d-flex justify-content-center"
                         >
-                          <Link to={`/details/${el.id}`}>
+                          <Link to={`/details/${el.course.id}`}>
                             <img
-                              className="col w-100 h-100 p-0 custom-pointer"
-                              src={el.image}
+                              className=" w-100 h-100 mx-auto col"
+                              src={el.course.image}
                               alt=""
                             />
                           </Link>
                         </div>
                       </div>
                       <div className="details pb-3 px-1">
-                        <Link to={`/details/${el.id}`}>
-                          <h5 className=" fw-bolder custom-pointer">
-                            {el.name} - Learn {el.courseType.name} Course Online
+                        <Link to={`/details/${el.course.id}`}>
+                          <h5 className=" fw-bolder">
+                            {el.course.name} - Learn {el.course.courseType.name}{" "}
+                            Course Online
                           </h5>
                         </Link>
                         <div className="d-flex flex-column justify-content-between">
-                          <p className="name">{el.appUser.userName}</p>
-                          <p className="value m-0">$ {el.price}</p>
+                          <p className="name">{el.course.appUser.userName}</p>
+                          <p className="value m-0">$ {el.course.price}</p>
                         </div>
                         <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
-                          <small className="star">
-                            4.2{" "}
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star checked text-warning" />
-                            <i className="fa fa-star" />
-                            <i className="fa fa-star" /> (2277 ratings)
+                          <small className="star d-flex align-items-center">
+                            {el.numOfRating > 0
+                              ? Number.parseFloat(el.averageRating).toFixed(1)
+                              : ""}
+                            <ReactStars
+                              key={el.averageRating}
+                              value={el.averageRating}
+                              {...firstExample}
+                            />
+                            ({el.numOfRating} ratings)
                           </small>
                           <small className="d-inline-block">
-                            77 lectures • All levels • 25 Reviews
+                            {el.numOfVideo} lectures • All levels •{" "}
+                            {el.numOfStudent}{" "}
+                            {el.numOfStudent > 1 ? "students" : "student"}
                           </small>
                         </div>
                         <div className="mt-3 mb-0 d-flex justify-content-between align-items-center">
-                          {myCourses.find((temp) => temp.course.id == el.id) ? (
+                          {myCourses.find(
+                            (temp) => temp.purchase.course.id == el.course.id
+                          ) ? (
                             <Link
                               className=" btn btn-outline-primary back-btn w-75"
-                              to={`/details/${el.id}`}
+                              to={`/details/${el.course.id}`}
                             >
                               Go To Course →
                             </Link>
                           ) : (
                             <button
                               className=" btn btn-outline-success w-75"
-                              onClick={() => handleAddToCart(el.id)}
+                              onClick={() => handleAddToCart(el.course.id)}
                             >
                               Add to Cart
                             </button>
                           )}
-                          {favorites.find((temp) => temp.course.id == el.id) ? (
+                          {favorites.find(
+                            (temp) => temp.favorites.course.id == el.course.id
+                          ) ? (
                             <AiFillHeart
                               style={{
                                 width: "20px",
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiFillHeart>
                           ) : (
                             <AiOutlineHeart
@@ -638,7 +699,7 @@ export default function Home() {
                                 height: "20px",
                                 color: "#DB7093",
                               }}
-                              onClick={() => handleHeartClick(el.id)}
+                              onClick={() => handleHeartClick(el.course.id)}
                             ></AiOutlineHeart>
                           )}
                         </div>
@@ -650,7 +711,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* <Footer /> */}
+      <Footer />
       <ToastContainer autoClose={2000} className="toast-position" />
     </>
   );

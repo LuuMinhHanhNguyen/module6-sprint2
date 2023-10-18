@@ -5,10 +5,17 @@ import { getAppUserInfoFromJwtToken } from "../service/LogInService";
 import { AiFillHeart } from "react-icons/ai";
 import Header from "./Header";
 import Footer from "./Footer";
+import ReactStars from "react-rating-stars-component";
 
 export default function MyLearning() {
   const [appUser, setAppUser] = useState({});
   const [myCourses, setMyCourses] = useState([]);
+
+  const firstExample = {
+    size: 15,
+    activeColor: "#f4ab20",
+    edit: false,
+  };
 
   const extractToken = () => {
     console.log("heheheh");
@@ -38,7 +45,7 @@ export default function MyLearning() {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <h1
         style={{ marginTop: "100px" }}
         className="mb-0 p-0 fw-bolder text-center"
@@ -63,7 +70,7 @@ export default function MyLearning() {
           myCourses.map((el) => {
             return (
               <div
-                key={`el-${el.id}`}
+                key={`el-${el.purchase.id}`}
                 className="single-popular-course mb-3"
                 style={{ width: "300px" }}
               >
@@ -72,35 +79,42 @@ export default function MyLearning() {
                     style={{ height: "200px" }}
                     className=" d-flex justify-content-center"
                   >
-                    <Link to={`/details/${el.course.id}`}>
+                    <Link to={`/details/${el.purchase.course.id}`}>
                       <img
                         className=" w-100 h-100 mx-auto col"
-                        src={el.course.image}
+                        src={el.purchase.course.image}
                         alt=""
                       />
                     </Link>
                   </div>
                 </div>
                 <div className="details pb-3 px-1">
-                  <Link to={`/details/${el.course.id}`}>
+                  <Link to={`/details/${el.purchase.course.id}`}>
                     <h5 className=" fw-bolder">
-                      {el.course.name} - Learn {el.course.courseType.name}{" "}
-                      Course Online
+                      {el.purchase.course.name} - Learn{" "}
+                      {el.purchase.course.courseType.name} Course Online
                     </h5>
                   </Link>
                   <div className="d-flex flex-column justify-content-between">
-                    <p className="name">{el.course.appUser.userName}</p>
+                    <p className="name">
+                      {el.purchase.course.appUser.userName}
+                    </p>
                   </div>
                   <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
-                    <small className="star">
-                      4.2 <i className="fa fa-star checked text-warning" />
-                      <i className="fa fa-star checked text-warning" />
-                      <i className="fa fa-star checked text-warning" />
-                      <i className="fa fa-star" />
-                      <i className="fa fa-star" /> (2277 ratings)
+                    <small className="star d-flex align-items-center">
+                      {el.numOfRating > 0
+                        ? Number.parseFloat(el.averageRating).toFixed(1)
+                        : ""}
+                      <ReactStars
+                        key={el.averageRating}
+                        value={el.averageRating}
+                        {...firstExample}
+                      />
+                      ({el.numOfRating} ratings)
                     </small>
                     <small className="d-inline-block">
-                      77 lectures • All levels • 25 Reviews
+                      {el.numOfVideo} lectures • All levels • {el.numOfStudent}{" "}
+                      {el.numOfStudent > 1 ? "students" : "student"}
                     </small>
                   </div>
                 </div>
@@ -123,7 +137,7 @@ export default function MyLearning() {
           </>
         )}
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

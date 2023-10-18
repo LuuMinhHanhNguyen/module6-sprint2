@@ -18,7 +18,8 @@ public class FavoriteController {
 
     @GetMapping("")
     public ResponseEntity getAllFavorites(@RequestParam("appUserId") Long appUserId){
-        return new ResponseEntity<>(iFavoriteService.findAllByAppUserId(appUserId), HttpStatus.OK);
+
+        return new ResponseEntity<>(iFavoriteService.findByAppUserId(appUserId), HttpStatus.OK);
     }
 
     @PostMapping("")

@@ -59,9 +59,13 @@ export default function Header() {
       <header className="default-header" style={{ height: "70px" }}>
         <nav className="navbar navbar-expand-lg navbar-light">
           <div className="container">
-            <div className="p-0 m-0" style={{ width: "70px" }}>
-              <img src={logo} className="w-100" alt="" />
-            </div>
+            <Link to="/">
+              {" "}
+              <div className="p-0 m-0" style={{ width: "70px" }}>
+                <img src={logo} className="w-100" alt="" />
+              </div>
+            </Link>
+
             <button
               className="navbar-toggler"
               type="button"

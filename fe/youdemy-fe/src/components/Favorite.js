@@ -12,6 +12,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { useDispatch } from "react-redux";
 import { findAllCarts } from "../redux/cartAction";
+import ReactStars from "react-rating-stars-component";
 
 export default function Favorite() {
   const [appUser, setAppUser] = useState({});
@@ -20,6 +21,12 @@ export default function Favorite() {
   const [myCourses, setMyCourses] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const firstExample = {
+    size: 15,
+    activeColor: "#f4ab20",
+    edit: false,
+  };
 
   const extractToken = () => {
     console.log("heheheh");
@@ -87,7 +94,7 @@ export default function Favorite() {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <h1
         style={{ marginTop: "100px" }}
         className="mb-0 p-0 fw-bolder text-center"
@@ -105,7 +112,7 @@ export default function Favorite() {
           favorites.map((el) => {
             return (
               <div
-                key={`el-${el.id}`}
+                key={`el-${el.favorites.id}`}
                 className="single-popular-course mb-3"
                 style={{ width: "300px" }}
               >
@@ -114,58 +121,67 @@ export default function Favorite() {
                     style={{ height: "200px" }}
                     className=" d-flex justify-content-center"
                   >
-                    <Link to={`/details/${el.course.id}`}>
+                    <Link to={`/details/${el.favorites.course.id}`}>
                       <img
                         className=" w-100 h-100 mx-auto col"
-                        src={el.course.image}
+                        src={el.favorites.course.image}
                         alt=""
                       />
                     </Link>
                   </div>
                 </div>
                 <div className="details pb-3 px-1">
-                  <Link to={`/details/${el.course.id}`}>
+                  <Link to={`/details/${el.favorites.course.id}`}>
                     <h5 className=" fw-bolder">
-                      {el.course.name} - Learn {el.course.courseType.name}{" "}
-                      Course Online
+                      {el.favorites.course.name} - Learn{" "}
+                      {el.favorites.course.courseType.name} Course Online
                     </h5>
                   </Link>
                   <div className="d-flex flex-column justify-content-between">
-                    <p className="name">{el.course.appUser.userName}</p>
-                    <p className="value m-0">$ {el.course.price}</p>
+                    <p className="name">
+                      {el.favorites.course.appUser.userName}
+                    </p>
+                    <p className="value m-0">$ {el.favorites.course.price}</p>
                   </div>
                   <div className="bottom d-flex align-items-start flex-column align-items-start  justify-content-start">
-                    <small className="star">
-                      4.2 <i className="fa fa-star checked text-warning" />
-                      <i className="fa fa-star checked text-warning" />
-                      <i className="fa fa-star checked text-warning" />
-                      <i className="fa fa-star" />
-                      <i className="fa fa-star" /> (2277 ratings)
+                    <small className="star d-flex align-items-center">
+                      {el.numOfRating > 0
+                        ? Number.parseFloat(el.averageRating).toFixed(1)
+                        : ""}
+                      <ReactStars
+                        key={el.averageRating}
+                        value={el.averageRating}
+                        {...firstExample}
+                      />
+                      ({el.numOfRating} ratings)
                     </small>
                     <small className="d-inline-block">
-                      77 lectures • All levels • 25 Reviews
+                      {el.numOfVideo} lectures • All levels • {el.numOfStudent}{" "}
+                      {el.numOfStudent > 1 ? "students" : "student"}
                     </small>
                   </div>
                   <div className="mt-3 mb-0 d-flex justify-content-between align-items-center">
                     {myCourses.find(
-                      (temp) => temp.course.id == el.course.id
+                      (temp) =>
+                        temp.purchase.course.id == el.favorites.course.id
                     ) ? (
                       <Link
                         className=" btn btn-outline-primary back-btn w-75"
-                        to={`/details/${el.course.id}`}
+                        to={`/details/${el.favorites.course.id}`}
                       >
                         Go To Course →
                       </Link>
                     ) : (
                       <button
                         className=" btn btn-outline-success w-75"
-                        onClick={() => handleAddToCart(el.course.id)}
+                        onClick={() => handleAddToCart(el.favorites.course.id)}
                       >
                         Add to Cart
                       </button>
                     )}
                     {favorites.find(
-                      (temp) => temp.course.id == el.course.id
+                      (temp) =>
+                        temp.favorites.course.id == el.favorites.course.id
                     ) ? (
                       <AiFillHeart
                         style={{
@@ -173,7 +189,7 @@ export default function Favorite() {
                           height: "20px",
                           color: "#DB7093",
                         }}
-                        onClick={() => handleHeartClick(el.course.id)}
+                        onClick={() => handleHeartClick(el.favorites.course.id)}
                       ></AiFillHeart>
                     ) : (
                       <AiOutlineHeart
@@ -182,7 +198,7 @@ export default function Favorite() {
                           height: "20px",
                           color: "#DB7093",
                         }}
-                        onClick={() => handleHeartClick(el.id)}
+                        onClick={() => handleHeartClick(el.favorites.course.id)}
                       ></AiOutlineHeart>
                     )}
                   </div>
@@ -208,7 +224,7 @@ export default function Favorite() {
       </div>
 
       <ToastContainer autoClose={2000} className="toast-position" />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

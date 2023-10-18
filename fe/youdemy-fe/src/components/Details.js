@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Rating from "react-rating";
+
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllVideos } from "../service/VideoService";
 import { findCourse } from "../service/CourseService";
 import ReactPlayer from "react-player";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import { FiLock } from "react-icons/fi";
 import "../css/details.css";
 import { checkFavorites, addToFavorites } from "../service/FavoriteService";
 import { getAppUserInfoFromJwtToken } from "../service/LogInService";
@@ -18,19 +19,43 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { findAllCarts } from "../redux/cartAction";
 import { getAllComments, saveComment } from "../service/CommentService";
+import ReactStars from "react-rating-stars-component";
 
 export default function Details() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [videos, setVideos] = useState([]);
   const [course, setCourse] = useState({});
+  const [numOfStudent, setNumOfStudent] = useState(null);
   const [isFavorite, setIsFavorite] = useState({});
   const [appUser, setAppUser] = useState({});
   const [isUpdated, setIsUpdated] = useState(false);
   const [myCourses, setMyCourses] = useState([]);
   const [videoUrl, setVideoUrl] = useState("");
   const [comments, setComments] = useState([]);
+  const [rating, setRating] = useState({});
   const dispatch = useDispatch();
+
+  const firstExample = {
+    size: 25,
+    activeColor: "#f4ab20",
+    edit: false,
+  };
+
+  const secondExample = {
+    size: 25,
+    count: 5,
+    color: "black",
+    activeColor: "#f4ab20",
+    value: 1,
+    a11y: true,
+    isHalf: false,
+    emptyIcon: <i className="fa fa-star m-1" />,
+    filledIcon: <i className="fa fa-star m-1" />,
+    onChange: (newValue) => {
+      document.getElementById("rating-star").value = newValue;
+    },
+  };
 
   const extractToken = () => {
     console.log("heheheh");
@@ -50,7 +75,8 @@ export default function Details() {
 
   const loadCourse = async () => {
     const data = await findCourse(id);
-    setCourse(data);
+    setCourse(data.course);
+    setNumOfStudent(data.numOfStudent);
     console.log("course");
     console.log(course);
   };
@@ -71,7 +97,8 @@ export default function Details() {
   const loadComments = async () => {
     // this is the {id} from useParams
     const data = await getAllComments(id);
-    setComments(data);
+    setComments(data.comments);
+    setRating(data.rating);
   };
 
   const handleHeartClick = async () => {
@@ -106,41 +133,47 @@ export default function Details() {
   };
 
   const handleSubmitReview = async () => {
-    const comment = document.getElementById("feedback").value;
-    console.log(comment);
-    if (!appUser.id) {
-      Swal.fire(
-        "You need to enroll in this course to leave feedback!",
-        "",
-        "warning"
-      );
+    if (document.getElementById("rating-star").value == "0") {
+      Swal.fire("Please leave your rating before submitting!", "", "warning");
     } else {
-      try {
-        const save = await saveComment(appUser.id, id, comment);
-        setIsUpdated(!isUpdated);
-        document.getElementById("feedback").value = "";
-      } catch (er) {
-        console.error(er);
-        if (er.response) {
-          console.log(er.response.data);
-          console.log(er.response.status);
-          if (er.response.status === 405) {
-            Swal.fire(
-              "Sorry! You already left your feedback some time ago!",
-              "",
-              "info"
-            );
-            setIsUpdated(!isUpdated);
-            document.getElementById("feedback").value = "";
-          }
-          if (er.response.status === 406) {
-            Swal.fire(
-              "You need to enroll in this course to leave feedback!",
-              "",
-              "warning"
-            );
-            setIsUpdated(!isUpdated);
-            document.getElementById("feedback").value = "";
+      const comment = document.getElementById("feedback").value;
+      const rating = document.getElementById("rating-star").value;
+      console.log(comment);
+      if (!appUser.id) {
+        Swal.fire(
+          "You need to enroll in this course to leave feedback!",
+          "",
+          "warning"
+        );
+      } else {
+        try {
+          const save = await saveComment(appUser.id, id, comment, rating);
+          setIsUpdated(!isUpdated);
+          document.getElementById("feedback").value = "";
+          Swal.fire("Thank You For Your Feedback! ❤️ ", "", "success");
+        } catch (er) {
+          console.error(er);
+          if (er.response) {
+            console.log(er.response.data);
+            console.log(er.response.status);
+            if (er.response.status === 405) {
+              Swal.fire(
+                "Sorry! You already left your feedback some time ago!",
+                "",
+                "info"
+              );
+              setIsUpdated(!isUpdated);
+              document.getElementById("feedback").value = "";
+            }
+            if (er.response.status === 406) {
+              Swal.fire(
+                "You need to enroll in this course to leave feedback!",
+                "",
+                "warning"
+              );
+              setIsUpdated(!isUpdated);
+              document.getElementById("feedback").value = "";
+            }
           }
         }
       }
@@ -174,7 +207,7 @@ export default function Details() {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <section className="course-details-area section-gap">
         <div className="container">
           <div className="row">
@@ -291,7 +324,7 @@ export default function Details() {
                             </div>
 
                             {myCourses.find(
-                              (temp) => temp.course.id == course.id
+                              (temp) => temp.purchase.course.id == course.id
                             ) ? (
                               <button
                                 className="btn text-uppercase"
@@ -303,10 +336,16 @@ export default function Details() {
                               </button>
                             ) : (
                               <button
-                                className="btn text-uppercase"
+                                className="btn text-uppercase d-flex align-items-center"
                                 disabled={el.free == false}
+                                onClick={() =>
+                                  handleChangeVideoPath(el.urlPath)
+                                }
                               >
-                                View Details
+                                View Details{" "}
+                                {el.free == false && (
+                                  <FiLock className=" ms-2"></FiLock>
+                                )}
                               </button>
                             )}
                           </li>
@@ -321,14 +360,22 @@ export default function Details() {
                 <ul>
                   <li>
                     <a className="justify-content-between d-flex" href="#">
-                      <p>Trainer’s Name</p>
+                      <p>Course</p>
+                      <span className="or">{course.name}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a className="justify-content-between d-flex" href="#">
+                      <p>Instructor’s Name</p>
                       <span className="or">{course.appUser.userName}</span>
                     </a>
                   </li>
                   <li>
                     <a className="justify-content-between d-flex" href="#">
                       <p>Course Fee </p>
-                      {myCourses.find((temp) => temp.course.id == course.id) ? (
+                      {myCourses.find(
+                        (temp) => temp.purchase.course.id == course.id
+                      ) ? (
                         <span>Paid</span>
                       ) : (
                         <span>${course.price}</span>
@@ -343,14 +390,22 @@ export default function Details() {
                   </li>
                   <li>
                     <a className="justify-content-between d-flex" href="#">
-                      <p>Number Of Lectures </p>
+                      <p>Lectures </p>
                       <span>{videos.length}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a className="justify-content-between d-flex" href="#">
+                      <p>Number Of Students </p>
+                      <span>{numOfStudent}</span>
                     </a>
                   </li>
                 </ul>
               )}
-              <div className=" d-flex justify-content-between align-items-center">
-                {myCourses.find((temp) => temp.course.id == course.id) ? (
+              <div className=" d-flex justify-content-between align-items-center mt-5">
+                {myCourses.find(
+                  (temp) => temp.purchase.course.id == course.id
+                ) ? (
                   <button
                     type="button"
                     className="btn text-uppercase mt-0 enroll col col-9"
@@ -391,54 +446,44 @@ export default function Details() {
                 </div>
               </div>
 
-              <h4 className="title">Reviews</h4>
+              <p className="m-0 mt-5 fw-bold" style={{ fontSize: "24px" }}>
+                Reviews & Ratings
+              </p>
+              <div className=" d-flex flex-row title m-0 align-items-center gap-2">
+                <h6 className="m-0">
+                  {rating.numOfRating > 0
+                    ? Number.parseFloat(rating.averageRating).toFixed(1)
+                    : ""}
+                </h6>
+                <ReactStars
+                  key={rating.averageRating}
+                  value={rating.averageRating}
+                  {...firstExample}
+                />
+                <h6 className="m-0">({rating.numOfRating} ratings)</h6>
+              </div>
               <div className="content">
-                <div className="review-top row pt-40">
+                <div className="review-top row pt-20">
                   <div className="col-lg-12">
-                    <h6 className="mb-15">Provide Your Rating</h6>
-                    <div className="d-flex flex-row reviews justify-content-between">
-                      <span>Quality</span>
-                      <div className="star">
-                        <i className="fa fa-star checked" />
-                        <i className="fa fa-star checked" />
-                        <i className="fa fa-star checked" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                      </div>
-                      <span>Outstanding</span>
-                    </div>
-                    <div className="d-flex flex-row reviews justify-content-between">
-                      <span>Puncuality</span>
-                      <div className="star">
-                        <i className="fa fa-star checked" />
-                        <i className="fa fa-star checked" />
-                        <i className="fa fa-star checked" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                      </div>
-                      <span>Outstanding</span>
-                    </div>
-                    <div className="d-flex flex-row reviews justify-content-between">
-                      <span>Quality</span>
-                      <div className="star">
-                        <i className="fa fa-star checked" />
-                        <i className="fa fa-star checked" />
-                        <i className="fa fa-star checked" />
-                        <i className="fa fa-star" />
-                        <i className="fa fa-star" />
-                      </div>
-                      <span>Outstanding</span>
+                    <div className="d-flex align-items-center">
+                      <h6 className=" m-0 me-3 fw-bold">Your Rating: </h6>
+                      <input id="rating-star" value="0" type="hidden"></input>
+                      <ReactStars
+                        {...secondExample}
+                        className="star-gap"
+                        style={{ marginRight: "10px" }}
+                      />
                     </div>
                   </div>
                 </div>
-                <div className="feedeback">
-                  <h6 className="mb-10">Your Feedback</h6>
+                <div className="feedback mt-0">
+                  <h6 className="my-1 mb-2 fw-bold">Your Feedback:</h6>
                   <textarea
                     id="feedback"
                     name="feedback"
                     className="form-control"
                     cols={10}
-                    rows={10}
+                    rows={5}
                     defaultValue={""}
                   />
                   <div className="mt-10 text-right">
@@ -451,36 +496,53 @@ export default function Details() {
                     </button>
                   </div>
                 </div>
-                <div className="comments-area mb-30">
+                <div
+                  className="comments-area mb-30 "
+                  style={{ height: "1000px", overflowY: "scroll" }}
+                >
                   {comments.length > 0 &&
-                    comments.map((el) => {
-                      return (
-                        <div className="comment-list" key={`cmt-${el.id}`}>
-                          <div className="single-comment single-reviews justify-content-between d-flex">
-                            <div className="user justify-content-between flex-column d-flex">
-                              <div className="d-flex justify-content-between">
-                                <h5>
-                                  <a href="#">{el.appUser.userName}</a>
-                                  <div className="star">
-                                    <span className="fa fa-star checked" />
-                                    <span className="fa fa-star checked" />
-                                    <span className="fa fa-star checked" />
-                                    <span className="fa fa-star" />
-                                    <span className="fa fa-star" />
-                                  </div>
-                                </h5>
-                                <p>
-                                  <small>{el.commentDate}</small>
-                                </p>
+                    comments
+                      .slice()
+                      .reverse()
+                      .map((el) => {
+                        return (
+                          <div
+                            className="comment-list m-0 p-0 mb-2"
+                            key={`cmt-${el.id}`}
+                          >
+                            <div className="single-comment single-reviews flex-column d-flex">
+                              <div className="d-flex justify-content-between ">
+                                <div className=" d-flex m-0 p-0 justify-content-start align-items-center col-7">
+                                  <a href="#" className=" me-2 fw-bold">
+                                    {el.appUser.userName}
+                                  </a>
+                                  <ReactStars
+                                    key={el.rating}
+                                    value={el.rating}
+                                    {...firstExample}
+                                  />
+                                  {/* <div className="star">
+                                      <span className="fa fa-star checked" />
+                                      <span className="fa fa-star checked" />
+                                      <span className="fa fa-star checked" />
+                                      <span className="fa fa-star" />
+                                      <span className="fa fa-star" />
+                                    </div> */}
+                                </div>
+
+                                <div className="p-0 d-flex align-items-center justify-content-end col-5">
+                                  <p className="text-end m-0">
+                                    {el.commentDate}
+                                  </p>
+                                </div>
                               </div>
                               <div className="w-100">
                                 <p className="comment">{el.commentText}</p>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })}
 
                   {/* <div className="comment-list">
                     <div className="single-comment single-reviews justify-content-between d-flex">
@@ -540,7 +602,7 @@ export default function Details() {
           </div>
         </div>
       </section>
-      {/* <Footer /> */}
+      <Footer />
       <ToastContainer autoClose={2000} className="toast-position" />
     </>
   );

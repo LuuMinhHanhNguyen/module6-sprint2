@@ -22,7 +22,7 @@ export default function Billing() {
   }, []);
   return (
     <>
-      {/* <Header /> */}
+      <Header />
 
       <div id="hannah" className="pb-5 pt-5">
         <div style={{ marginTop: "50px" }} className=" h-auto">
@@ -166,7 +166,7 @@ export default function Billing() {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
