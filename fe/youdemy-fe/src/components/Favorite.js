@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import { useDispatch } from "react-redux";
 import { findAllCarts } from "../redux/cartAction";
 import ReactStars from "react-rating-stars-component";
+import SubSection from "./SubSection";
 
 export default function Favorite() {
   const [appUser, setAppUser] = useState({});
@@ -89,6 +90,7 @@ export default function Favorite() {
   useEffect(() => {
     if (appUser.id) {
       loadFavoriteCourses(appUser.id);
+      window.scrollTo(0, 0);
     }
   }, [appUser.id, isUpdated]);
 
@@ -153,7 +155,8 @@ export default function Favorite() {
                         value={el.averageRating}
                         {...firstExample}
                       />
-                      ({el.numOfRating} ratings)
+                      ({el.numOfRating}{" "}
+                      {el.numOfRating > 1 ? "ratings" : "rating"})
                     </small>
                     <small className="d-inline-block">
                       {el.numOfVideo} lectures • All levels • {el.numOfStudent}{" "}
@@ -222,6 +225,7 @@ export default function Favorite() {
           </>
         )}
       </div>
+      <SubSection />
 
       <ToastContainer autoClose={2000} className="toast-position" />
       <Footer />

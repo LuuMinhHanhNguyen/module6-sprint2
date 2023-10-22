@@ -8,6 +8,9 @@ import {
   addJwtTokenToLocalStorage,
   getAppUserInfoFromJwtToken,
 } from "../service/LogInService";
+import Swal from "sweetalert2";
+import Header from "./Header";
+import Footer from "./Footer";
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -22,6 +25,7 @@ export default function LogIn() {
       addJwtTokenToLocalStorage(data.data.token);
       console.log(getAppUserInfoFromJwtToken(data.data.token));
       navigate("/");
+      Swal.fire("Logged In Successfully!", "", "success");
     }
   };
 
@@ -109,12 +113,9 @@ export default function LogIn() {
                   </button>
                   <div className="other">
                     {/*      Forgot Password button*/}
-                    <button
-                      className="btn submits frgt-pass button-login"
-                      type="button"
-                    >
-                      Forgot Password
-                    </button>
+                    <Link to="/" className="btn submits frgt-pass button-login">
+                      ← Home
+                    </Link>
                     {/*     Sign Up button */}
                     <Link
                       className="btn submits sign-up button-login"

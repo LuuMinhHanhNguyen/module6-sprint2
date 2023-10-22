@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiShoppingCart, FiUser } from "react-icons/fi";
+import { Formik, Form, Field } from "formik";
+import * as yup from "yup";
+import { FiShoppingCart, FiUser, FiSearch } from "react-icons/fi";
 import "../css/header.css";
+
 import { getAppUserInfoFromJwtToken } from "../service/LogInService";
 import { getCourseTypes } from "../service/CourseTypeService";
 import { AiOutlineHeart } from "react-icons/ai";
@@ -11,9 +14,10 @@ import Swal from "sweetalert2";
 import { useDispatch, useSelector } from "react-redux";
 import { findAllCarts } from "../redux/cartAction";
 
-export default function Header() {
+export default function Header(props) {
   const [appUser, setAppUser] = useState({});
   const [courseTypes, setCourseTypes] = useState([]);
+  const [submittedValue, setSubmittedValue] = useState("");
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -49,6 +53,12 @@ export default function Header() {
     window.location.reload();
   };
 
+  const handleSearch = (values) => {
+    const searchInfo = document.getElementById("search-input").value;
+    navigate("/search", { state: { searchInfo: searchInfo } });
+    setSubmittedValue(values.searchInfo);
+  };
+
   useEffect(() => {
     extractToken();
     loadCourseTypes();
@@ -65,6 +75,40 @@ export default function Header() {
                 <img src={logo} className="w-100" alt="" />
               </div>
             </Link>
+
+            <div className="w-25 ms-5" id="search-input-box">
+              <Formik
+                initialValues={{
+                  searchInfo: props.searchInfo ? props.searchInfo : "",
+                }}
+                validationSchema={yup.object({
+                  searchInfo: yup.string().required(),
+                })}
+                onSubmit={(values) => handleSearch(values)}
+              >
+                <Form class="d-flex justify-content-between">
+                  <Field
+                    name="searchInfo"
+                    type="text"
+                    class="form-control"
+                    id="search-input"
+                    placeholder="Search for anything"
+                  />
+
+                  <button
+                    type="submit"
+                    style={{
+                      cursor: "pointer",
+                      background: "none",
+                      border: "none",
+                    }}
+                    className="search fs-5 "
+                  >
+                    <FiSearch />
+                  </button>
+                </Form>
+              </Formik>
+            </div>
 
             <button
               className="navbar-toggler"
@@ -128,7 +172,6 @@ export default function Header() {
                 <li className="dropdown">
                   <Link
                     to={appUser.id ? "#" : "/log-in"}
-                    href=""
                     className="header-btn header-cart position-relative dropdown-toggle link-login"
                     data-toggle="dropdown"
                   >
@@ -145,6 +188,12 @@ export default function Header() {
                         <button className="dropdown-item fw-bolder text-uppercase">
                           Profile
                         </button>
+                        <Link
+                          to="/purchase-history"
+                          className="dropdown-item fw-bolder text-uppercase"
+                        >
+                          Purchase history
+                        </Link>
                         <button
                           type="button"
                           onClick={handleLogOut}

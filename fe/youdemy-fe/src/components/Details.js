@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
+import EmojiPicker, { EmojiStyle } from "emoji-picker-react";
+import Avatar from "react-avatar";
 
 import { useNavigate, useParams } from "react-router-dom";
 import { getAllVideos } from "../service/VideoService";
 import { findCourse } from "../service/CourseService";
 import ReactPlayer from "react-player";
-import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import {
+  AiFillHeart,
+  AiOutlineHeart,
+  AiOutlineSmile,
+  AiOutlineLike,
+  AiFillLike,
+} from "react-icons/ai";
 import { FiLock } from "react-icons/fi";
 import "../css/details.css";
 import { checkFavorites, addToFavorites } from "../service/FavoriteService";
@@ -19,7 +27,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { findAllCarts } from "../redux/cartAction";
 import { getAllComments, saveComment } from "../service/CommentService";
+import { saveQuestion, getAllQuestions } from "../service/QuestionService";
+import { saveReply } from "../service/AnswerService";
 import ReactStars from "react-rating-stars-component";
+import TextareaAutosize from "react-textarea-autosize";
 
 export default function Details() {
   const navigate = useNavigate();
@@ -35,6 +46,24 @@ export default function Details() {
   const [comments, setComments] = useState([]);
   const [rating, setRating] = useState({});
   const dispatch = useDispatch();
+  const [text, setText] = useState("");
+  const [showICons, setShowIcons] = useState(false);
+  const [randomColor, setRandomColor] = useState("");
+  const [questions, setQuestions] = useState([]);
+  const [replyText, setReplyText] = useState("");
+
+  useEffect(() => {
+    setRandomColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
+  }, []);
+
+  const onClick = (emojiData, event) => {
+    console.log(emojiData.emoji);
+    setText((currentText) => currentText + emojiData.emoji);
+  };
+  const onReplyClick = (emojiData, event) => {
+    console.log(emojiData.emoji);
+    setReplyText((currentText) => currentText + emojiData.emoji);
+  };
 
   const firstExample = {
     size: 25,
@@ -47,7 +76,7 @@ export default function Details() {
     count: 5,
     color: "black",
     activeColor: "#f4ab20",
-    value: 1,
+    value: 0,
     a11y: true,
     isHalf: false,
     emptyIcon: <i className="fa fa-star m-1" />,
@@ -99,6 +128,13 @@ export default function Details() {
     const data = await getAllComments(id);
     setComments(data.comments);
     setRating(data.rating);
+  };
+
+  const loadQuestions = async () => {
+    // this is the {id} from useParams
+    const data = await getAllQuestions(id);
+    setQuestions(data);
+    console.log(data);
   };
 
   const handleHeartClick = async () => {
@@ -180,6 +216,27 @@ export default function Details() {
     }
   };
 
+  const handleSubmitComment = async () => {
+    if (!appUser.id) {
+      Swal.fire("You need to sign in first!", "", "warning");
+      navigate("/log-in");
+    } else {
+      const data = await saveQuestion(appUser.id, id, text);
+      setIsUpdated(!isUpdated);
+      setText("");
+      Swal.fire("Thank You For Your Question! ❤️ ", "", "success");
+    }
+  };
+
+  const handleSubmitReply = async (questionId) => {
+    const text = document.getElementById(`replyText-${questionId}`).value;
+    const data = await saveReply(appUser.id, questionId, text);
+    setIsUpdated(!isUpdated);
+    document.getElementById(`replyText-${questionId}`).value = "";
+    document.getElementById(`rep-${questionId}`).style.display = "none";
+    Swal.fire("Thank You For Your Reply! ❤️ ", "", "success");
+  };
+
   useEffect(() => {
     if (appUser.id) {
       loadMyCourses(appUser.id);
@@ -189,6 +246,7 @@ export default function Details() {
   useEffect(() => {
     loadAllVideos();
     loadCourse();
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -202,6 +260,7 @@ export default function Details() {
   }, [appUser.id, course.id, isUpdated]);
 
   useEffect(() => {
+    loadQuestions();
     loadComments();
   }, [isUpdated]);
 
@@ -353,6 +412,228 @@ export default function Details() {
                       })}
                   </ul>
                 </div>
+                {/* comments sec */}
+                <hr className=" my-5"></hr>
+                <section>
+                  <h1 className="mb-4">777 comments Sort by</h1>
+                  <div className=" d-flex flex-column align-items-center mb-5">
+                    <div className=" d-flex align-items-center w-100">
+                      <Avatar
+                        name={appUser.id ? appUser.userName : ""}
+                        round={true}
+                        size="40"
+                        className=" me-2"
+                        color={randomColor}
+                      />
+
+                      <TextareaAutosize
+                        style={{
+                          width: "100%",
+                          border: "none",
+                          borderBottom: "1px solid black",
+                        }}
+                        className=" px-2"
+                        onChange={(event) => setText(event.target.value)}
+                        value={text}
+                        placeholder="Add a comment..."
+                      />
+                    </div>
+                    {text.length > 0 && (
+                      <div className=" d-flex  justify-content-between w-100 px-5">
+                        <div>
+                          <AiOutlineSmile
+                            size={25}
+                            onClick={() => setShowIcons((prev) => !prev)}
+                          ></AiOutlineSmile>
+                          {showICons && (
+                            <EmojiPicker
+                              onEmojiClick={onClick}
+                              autoFocusSearch={false}
+                              emojiStyle={EmojiStyle.NATIVE}
+                            />
+                          )}
+                        </div>
+                        <div className="d-flex align-items-start">
+                          <button
+                            className="btn"
+                            onClick={() => {
+                              setShowIcons(false);
+                              setText("");
+                            }}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            className="btn btn-outline-primary back-btn "
+                            style={{ borderRadius: "100px" }}
+                            onClick={handleSubmitComment}
+                          >
+                            Comment
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {questions.length > 0 &&
+                    questions
+                      .slice()
+                      .reverse()
+                      .map((el) => {
+                        return (
+                          <>
+                            <div className=" d-flex  align-items-start mb-4 ">
+                              <div>
+                                <Avatar
+                                  name={el.appUser.userName}
+                                  round={true}
+                                  size="40"
+                                  className=" me-2"
+                                  color={randomColor}
+                                />
+                              </div>
+                              <div className=" px-2 d-flex flex-column align-items-start justify-content-start flex-grow-1">
+                                <p className="m-0 fw-bold">
+                                  {el.appUser.userName}{" "}
+                                  <small>{el.questionDate}</small>
+                                </p>
+                                <p className="m-0">{el.questionText}</p>
+                                <div>
+                                  <AiOutlineLike
+                                    style={{ cursor: "pointer" }}
+                                  ></AiOutlineLike>
+                                  <small className=" ms-1 fw-bold">77</small>
+                                  <button
+                                    className="ms-3 btn fw-bold"
+                                    onClick={() => {
+                                      console.log("heeeeerere");
+                                      let element = document.getElementById(
+                                        `rep-${el.id}`
+                                      );
+                                      if (element.style.display === "none") {
+                                        element.style.display = "block";
+                                      } else {
+                                        element.style.display = "none";
+                                      }
+                                    }}
+                                  >
+                                    Reply
+                                  </button>
+                                </div>
+                                <div
+                                  className="reply-section p-0 m-0 my-3 w-100"
+                                  style={{
+                                    display: "none",
+                                  }}
+                                  id={`rep-${el.id}`}
+                                >
+                                  <div className=" d-flex flex-column align-items-start w-100">
+                                    <div className=" d-flex align-items-center w-100">
+                                      <Avatar
+                                        name={
+                                          appUser.id ? appUser.userName : ""
+                                        }
+                                        round={true}
+                                        size="40"
+                                        className=" me-2"
+                                        color={randomColor}
+                                      />
+
+                                      <div className="d-flex w-100 flex-grow-1">
+                                        <TextareaAutosize
+                                          id={`replyText-${el.id}`}
+                                          style={{
+                                            width: "100%",
+                                            border: "none",
+                                            borderBottom: "1px solid black",
+                                          }}
+                                          className=" px-2 w-100 flex-grow-1"
+                                          onChange={(event) =>
+                                            (document.getElementById(
+                                              `replyText-${el.id}`
+                                            ).value = event.target.value)
+                                          }
+                                          defaultValue=""
+                                          placeholder="Add a reply..."
+                                        />
+                                      </div>
+                                    </div>
+
+                                    <div className=" d-flex  justify-content-between w-100 px-5 position-relative">
+                                      <div>
+                                        <AiOutlineSmile
+                                          size={25}
+                                          onClick={() => {
+                                            console.log("heeeeerere");
+                                            let element =
+                                              document.getElementById(
+                                                `icon-${el.id}`
+                                              );
+                                            if (
+                                              element.style.display === "none"
+                                            ) {
+                                              element.style.display = "block";
+                                            } else {
+                                              element.style.display = "none";
+                                            }
+                                          }}
+                                        ></AiOutlineSmile>
+
+                                        <div
+                                          id={`icon-${el.id}`}
+                                          style={{
+                                            position: "absolute",
+                                            display: "none",
+                                          }}
+                                        >
+                                          <EmojiPicker
+                                            onEmojiClick={(
+                                              emojiData,
+                                              event
+                                            ) => {
+                                              document.getElementById(
+                                                `replyText-${el.id}`
+                                              ).value += emojiData.emoji;
+                                            }}
+                                            autoFocusSearch={false}
+                                            emojiStyle={EmojiStyle.NATIVE}
+                                          />
+                                        </div>
+                                      </div>
+                                      <div className="d-flex align-items-start">
+                                        <button
+                                          className="btn"
+                                          onClick={() => {
+                                            setShowIcons(false);
+                                            document.getElementById(
+                                              `rep-${el.id}`
+                                            ).style.display = "none";
+                                            document.getElementById(
+                                              `replyText-${el.id}`
+                                            ).value = "";
+                                          }}
+                                        >
+                                          Cancel
+                                        </button>
+                                        <button
+                                          className="btn btn-outline-primary back-btn "
+                                          style={{ borderRadius: "100px" }}
+                                          onClick={() =>
+                                            handleSubmitReply(el.id)
+                                          }
+                                        >
+                                          Comment
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </>
+                        );
+                      })}
+                </section>
               </div>
             </div>
             <div className="col-lg-4 right-contents">
@@ -460,7 +741,10 @@ export default function Details() {
                   value={rating.averageRating}
                   {...firstExample}
                 />
-                <h6 className="m-0">({rating.numOfRating} ratings)</h6>
+                <h6 className="m-0">
+                  ({rating.numOfRating}{" "}
+                  {rating.numOfRating > 1 ? "ratings" : "rating"})
+                </h6>
               </div>
               <div className="content">
                 <div className="review-top row pt-20">
@@ -521,13 +805,6 @@ export default function Details() {
                                     value={el.rating}
                                     {...firstExample}
                                   />
-                                  {/* <div className="star">
-                                      <span className="fa fa-star checked" />
-                                      <span className="fa fa-star checked" />
-                                      <span className="fa fa-star checked" />
-                                      <span className="fa fa-star" />
-                                      <span className="fa fa-star" />
-                                    </div> */}
                                 </div>
 
                                 <div className="p-0 d-flex align-items-center justify-content-end col-5">
@@ -543,65 +820,13 @@ export default function Details() {
                           </div>
                         );
                       })}
-
-                  {/* <div className="comment-list">
-                    <div className="single-comment single-reviews justify-content-between d-flex">
-                      <div className="user justify-content-between d-flex">
-                        <div className="thumb">
-                          <img src="img/blog/c2.jpg" alt="" />
-                        </div>
-                        <div className="desc">
-                          <h5>
-                            <a href="#">Elsie Cunningham</a>
-                            <div className="star">
-                              <span className="fa fa-star checked" />
-                              <span className="fa fa-star checked" />
-                              <span className="fa fa-star checked" />
-                              <span className="fa fa-star" />
-                              <span className="fa fa-star" />
-                            </div>
-                          </h5>
-                          <p className="comment">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="comment-list">
-                    <div className="single-comment single-reviews justify-content-between d-flex">
-                      <div className="user justify-content-between d-flex">
-                        <div className="thumb">
-                          <img src="img/blog/c3.jpg" alt="" />
-                        </div>
-                        <div className="desc">
-                          <h5>
-                            <a href="#">Maria Luna</a>
-                            <div className="star">
-                              <span className="fa fa-star checked" />
-                              <span className="fa fa-star checked" />
-                              <span className="fa fa-star checked" />
-                              <span className="fa fa-star" />
-                              <span className="fa fa-star" />
-                            </div>
-                          </h5>
-                          <p className="comment">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit, sed do eiusmod tempor incididunt ut labore et
-                            dolore.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
                 </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+
       <Footer />
       <ToastContainer autoClose={2000} className="toast-position" />
     </>

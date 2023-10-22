@@ -24,6 +24,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { findAllCarts } from "../redux/cartAction";
 import ReactStars from "react-rating-stars-component";
+import SubSection from "./SubSection";
 
 export default function Home() {
   const [courses, setCourses] = useState([]);
@@ -69,6 +70,8 @@ export default function Home() {
     console.log(data);
   };
 
+ 
+
   const handleHeartClick = async (courseId) => {
     if (appUser.id) {
       const data = await addToFavorites(appUser.id, courseId);
@@ -101,6 +104,8 @@ export default function Home() {
   useEffect(() => {
     loadAllCourses();
   }, []);
+
+ 
 
   useEffect(() => {
     if (appUser.id) {
@@ -147,7 +152,7 @@ export default function Home() {
           <div className="carousel-inner">
             <div className="carousel-item active" style={{ height: "550px" }}>
               <img
-                src="https://www.fastinfoclass.com/blogs/asset/upload/feature_images/Importance_of_English_Speaking_Course_copy.jpg"
+                src="https://www.venturelessons.com/wp-content/uploads/2021/03/Business-English.jpg"
                 className="d-block w-100 h-100"
                 alt="..."
               />
@@ -161,7 +166,7 @@ export default function Home() {
             </div>
             <div className="carousel-item" style={{ height: "550px" }}>
               <img
-                src="https://www.venturelessons.com/wp-content/uploads/2021/03/Business-English.jpg"
+                src="https://www.fastinfoclass.com/blogs/asset/upload/feature_images/Importance_of_English_Speaking_Course_copy.jpg"
                 className="d-block w-100 h-100"
                 alt="..."
               />
@@ -235,7 +240,8 @@ export default function Home() {
                               value={el.averageRating}
                               {...firstExample}
                             />
-                            ({el.numOfRating} ratings)
+                            ({el.numOfRating}{" "}
+                            {el.numOfRating > 1 ? "ratings" : "rating"})
                           </small>
                           <small className="d-inline-block">
                             {el.numOfVideo} lectures • All levels •{" "}
@@ -338,7 +344,8 @@ export default function Home() {
                               value={el.averageRating}
                               {...firstExample}
                             />
-                            ({el.numOfRating} ratings)
+                            ({el.numOfRating}{" "}
+                            {el.numOfRating > 1 ? "ratings" : "rating"})
                           </small>
                           <small className="d-inline-block">
                             {el.numOfVideo} lectures • All levels •{" "}
@@ -441,7 +448,8 @@ export default function Home() {
                               value={el.averageRating}
                               {...firstExample}
                             />
-                            ({el.numOfRating} ratings)
+                            ({el.numOfRating}{" "}
+                            {el.numOfRating > 1 ? "ratings" : "rating"})
                           </small>
                           <small className="d-inline-block">
                             {el.numOfVideo} lectures • All levels •{" "}
@@ -548,7 +556,8 @@ export default function Home() {
                               value={el.averageRating}
                               {...firstExample}
                             />
-                            ({el.numOfRating} ratings)
+                            ({el.numOfRating}{" "}
+                            {el.numOfRating > 1 ? "ratings" : "rating"})
                           </small>
                           <small className="d-inline-block">
                             {el.numOfVideo} lectures • All levels •{" "}
@@ -655,7 +664,8 @@ export default function Home() {
                               value={el.averageRating}
                               {...firstExample}
                             />
-                            ({el.numOfRating} ratings)
+                            ({el.numOfRating}{" "}
+                            {el.numOfRating > 1 ? "ratings" : "rating"})
                           </small>
                           <small className="d-inline-block">
                             {el.numOfVideo} lectures • All levels •{" "}
@@ -710,6 +720,8 @@ export default function Home() {
           </Carousel>
         </div>
       </section>
+
+      <SubSection />
 
       <Footer />
       <ToastContainer autoClose={2000} className="toast-position" />

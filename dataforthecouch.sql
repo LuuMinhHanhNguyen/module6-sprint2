@@ -17,14 +17,19 @@ INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_i
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (15, false, '$2a$10$blLPTEspDmA9hHqKbcoNMOoCCWEvUptTeP.9bpiOAeYaEGjlWSvpi', 'toefl4theinstructor', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (16, false, '$2a$10$RxL5zRPsROQx0a7TSLc4q.bofWzuIQBuOtyF1uk98pFI0Dxp1rvt6', 'toeic1theinstructor', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (17, false, '$2a$10$4EbsORXafIg01bp9L53Q4OVpp7LFHyVHSMYqUIKTRFsWtzDQOQRwO', 'toeic2theinstructor', 2);
-INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (18, false, '$2a$10$zjOZ9hRpehKPYghFBk6/WOqRRsSrZLLnckVWfwqsAMqqPn8EvbaNO', 'hannah', 2);
+INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (18, false, '$2a$10$zjOZ9hRpehKPYghFBk6/WOqRRsSrZLLnckVWfwqsAMqqPn8EvbaNO', 'tomwallace', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (19, false, '$2a$10$atzanixZWlo4jREhlMHJDOfyy7lRxGjT9FH4deFSTjtTriTK4/ieu', 'toeic3theinstructor', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (20, false, '$2a$10$yRaXm4ZYRLHZCJJALAgaIOf5u46Od4bnslixOGJXalW/xAbfipa2K', 'toeic4theinstructor', 2);
-INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (21, false, '$2a$10$HDgo8/TzsNTUpW3NG7nKUuiEKwFqaxYUX.twCSsD608CAFconOK8m', 'toeic5theinstructor', 2);
+INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (21, false, '$2a$10$HDgo8/TzsNTUpW3NG7nKUuiEKwFqaxYUX.twCSsD608CAFconOK8m', 'ielts5theinstructor', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (22, false, '$2a$10$asfv6xpvqL0CmvDeUsyjreNXMN87VH05VVyp0.oDzHFoeX24Nk0DW', 'ielts1theinstructor', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (23, false, '$2a$10$QfwZ3DsW0UHbV1qOctFbCeFmEn9R2MpS.5uTrnmfRODT7x/uX45Bq', 'ielts2theinstructor', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (24, false, '$2a$10$2BN43NX0NyzBjQlX6HFY7.sa./0CGv1X1qWxMqxH0FvJi5e/dR7aW', 'ielts3theinstructor', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (25, false, '$2a$10$tZqp5f5FCiXX/A9qWca4w.zvFXA2MZLxGIgGdOaZE7P.Gxjjb.JW.', 'ielts4theinstructor', 2);
+INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (26, false, '$2a$10$mcFjTlimekpsofqy7E4Di.eR0Fwzwmgpx7mYKvbGO7Cv4kG8XZsWi', 'hannahluu777', 1);
+INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (27, false, '$2a$10$.lfFGkyfwltW8lin6UZEJe1p15JxRIQ0yiumiQ24FM5vI7LoZBnSu', 'son', 1);
+INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (28, false, '$2a$10$a8//mu5R3UWgKdBOYPorO.Qf.38vCqSReCtR276.2u/O.oedsQKiq', 'minhhanh', 1);
+INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (29, false, '$2a$10$7vfBzqrIN2WAGjWSp899Ie2suRLC2rXZS/cfhe/a5e0F3owpGJ.4S', 'hoangyen', 1);
+
 
 
 
@@ -62,7 +67,7 @@ We will upload new videos at 5 AM every Tuesday,Thursday, Friday and Saturday.
 
 Hope you will support our channel by liking 👍, commenting ✍️, sharing 📤 and subscribing 🔔 to the channel. 
 Thank you very much!', 55, 2, 5);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (3, 'Speak English With Tiffani', 'https://yt3.googleusercontent.com/ytc/APkrFKaVig1jOj1AlqgZauw0Y0RLxBGwNQZBYYiV9Z2y0Q=s176-c-k-c0x00ffffff-no-rj', 'Have you studied English for years but still can\'t speak? If so, this channel is for you!
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (3, 'Speak English With Tiffani', 'https://www.languagelabsystem.com/images/english-speaking-benefits.jpg', 'Have you studied English for years but still can\'t speak? If so, this channel is for you!
 This YouTube channel will teach you how to actually speak English. 
 
 Every week a video will be uploaded that reveals the true secrets to speaking English.
@@ -71,7 +76,7 @@ Stop stressing about English, stop simply memorizing vocabulary words, and actua
 Are you ready? Well then, let\'s jump right in!
 
 MEET TEACHER TIFFANI
-================================================
+
 Name: Tiffani
 What country am I from? America (USA)
 What was my previous job? Web Designer for NASA
@@ -88,7 +93,7 @@ INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, 
 English still requires a lot of your energy and leaves you feeling drained.
 ​You feel that your current English level prevents you from showing your true personality and intelligence, and that doesn’t feel good!
 If you said yes to any one of these, then you’re in the right place!', 52, 4, 5);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (5, 'linguamarina ', 'https://yt3.googleusercontent.com/ytc/APkrFKYSBImBt6zKYIhfE6wYBV3auR1kxlUGo8Q0g3yk=s176-c-k-c0x00ffffff-no-rj', 'Co-founder of a language-learning platform Linguatrip
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (5, 'linguamarina ', 'https://preply.com/wp-content/uploads/2020/11/Group-28779.png', 'Co-founder of a language-learning platform Linguatrip
 
 My name is Marina Mogilko (or Марина Могилко in Russian, I am originally from Saint-Petersburg)
 I am an entrepreneur and YouTuber. 
@@ -114,7 +119,7 @@ Each lesson will provide you with practical phrases and vocabulary that you can 
 Whether you’re a beginner looking to build confidence in speaking English, or an advanced learner aiming to polish your conversation skills, this course offers a supportive and engaging learning environment for all levels.
 
 So, let’s get started on this exciting journey to mastering daily English conversation! We can’t wait to see the progress you’ll make.', 33, 6, 4);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (7, 'RealLife English', 'https://yt3.ggpht.com/ytc/APkrFKbErzbJz4JWcP188dNXnhIzWMqToT5S-9jlrTAX1Q=s88-c-k-c0x00ffffff-no-rj', 'Just a British man educating international learners all about our wonderful culture & language. 
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (7, 'RealLife English', 'https://www.dailyenglish.fr/wp-content/uploads/2023/03/cropped-DAILY_ENGLISH_RVB.png', 'Just a British man educating international learners all about our wonderful culture & language. 
 Every week we create lessons that guide you beyond the classroom to SPEAK English naturally and confidently, connect to the world, and use your English as the doorway to your greatest life. 
 
 Welcome to our Everyday English Conversation Course!
@@ -186,7 +191,7 @@ We also have a sister platform to E2 Test Prep called E2 English (https://www.e2
 So, whatever you need help with, we\'re here for you. If you need help with your English exam, check out https://www.e2language.com/ and / or if you need help building your English skills check out https://www.e2school.com/
  
 Good luck! We wish you all the very best with your English language learning and exam preparation journey.', 60, 12, 3);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (13, 'TOEFL with Juva', 'https://yt3.ggpht.com/72Pv53B1U8oujJGDdG_lcODF5FG8_1UYvlZ7UsyzIFsOTN61fRbDOQ3IKPCrKGRs06-FD4L4=s88-c-k-c0x00ffffff-no-rj', 'Hi, I\'m Juva! My IELTS is 8.5, my TOEFL 115. I study at Oxford University and I help you pass your IELTS or TOEFL with success. Since I started this channel, IELTS and TOEFL students have been watching my lessons over 3 million times.
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (13, 'TOEFL with Juva', 'https://hrchannels.com/uptalent/attachments/images/20230418/11232089_TOEFL-la-gi-3.jpg', 'Hi, I\'m Juva! My IELTS is 8.5, my TOEFL 115. I study at Oxford University and I help you pass your IELTS or TOEFL with success. Since I started this channel, IELTS and TOEFL students have been watching my lessons over 3 million times.
 
 I help you get high scores in IELTS Listening, IELTS Reading, IELTS Writing, and IELTS Speaking as well as TOEFL Listening, TOEFL Reading, TOEFL Writing, and TOEFL Speaking.
 
@@ -201,7 +206,7 @@ Whether you’re just beginning your TOEFL journey or you’re an advanced learn
 
 So, let’s set sail on this exciting journey towards achieving TOEFL success! Your pathway to a top-notch TOEFL score begins here.
 ', 49.99, 13, 3);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (14, 'TOEFL TV Official', 'https://yt3.ggpht.com/NLpRNYT9oduFDYjhiJm6Yh9HQp8c3WzdS0i4ln3ARHZxtpykGBfl-TAtZEaZ3owQ2nvJfxwKbg=s88-c-k-c0x00ffffff-no-rj', 'Shape your destiny through the power of English proficiency. Conquer new horizons, break down barriers and elevate your life. Choose TOEFL iBT.
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (14, 'TOEFL TV Official', 'https://luyenthitoefl.edu.vn/uploads/tong-quan-ve-toefl-2022-2.jpg', 'Shape your destiny through the power of English proficiency. Conquer new horizons, break down barriers and elevate your life. Choose TOEFL iBT.
 
 The TOEFL iBT® test has helped millions of students achieve their dream of studying abroad at more than 12,000 universities and institutions in 160+ countries including the U.S., Canada, the U.K., Ireland, Australia, and across Europe and Asia.  Students have the choice to take the TOEFL iBT test at a local test center or from their home with the TOEFL iBT Home Edition. 
 Welcome to our Ultimate TOEFL Success Course!
@@ -214,7 +219,7 @@ Whether you’re a beginner embarking on your TOEFL journey or an advanced learn
 
 So, let’s embark on this exciting journey towards TOEFL excellence! Your quest for a high TOEFL score begins here.
 ', 55, 14, 3);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (15, 'Kathy TOEFL Teacher', 'https://yt3.ggpht.com/ytc/APkrFKbxgwb4FUn4w7Qr1lntZfjGwXv2GP4UwIPo72FlIA=s88-c-k-c0x00ffffff-no-rj', 'Welcome to our TOEFL Triumph Course!
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (15, 'Kathy TOEFL Teacher', 'https://news.meeycdn.net/uploads/images/2022/08/20/toefl-itp-la-gi-6-1660967624.jpg', 'Welcome to our TOEFL Triumph Course!
 
 This course is your all-in-one guide to mastering the Test of English as a Foreign Language (TOEFL). We’ll journey through each part of the test - Reading, Listening, Speaking, and Writing - arming you with effective strategies to optimize your performance.
 
@@ -234,7 +239,7 @@ Whether you’re a beginner just starting your TOEIC journey or an advanced lear
 So, let’s embark on this exciting journey towards TOEIC mastery! Your path to achieving a high TOEIC score starts here.
 TOEIC test prep just got easier! E2 Test Prep will show you how to pass this popular business English test, required by many international organisations. We will provide you with methods that work and practice materials that match the actual TOEIC test. E2 Test Prep has prepared over 1.3 million students for their English Exams and we want to help you with TOEIC. Sign up at www.e2language.com for affordable, quality language learning technology and test simulation and pass your TOEIC exam with guidance from the best English teachers in the world. 
 ', 40, 16, 2);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (17, 'TOEIC and English Improvement', 'https://yt3.googleusercontent.com/CPr9AftD4GhjNLE4FBj68MBje6kmdJQTBvyk05vaekxOmbpb8x_xOj09LJmWzmJuKCFJo0XQ4xg=s176-c-k-c0x00ffffff-no-rj', 'Welcome to our Comprehensive TOEIC Preparation Course!
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (17, 'TOEIC and English Improvement', 'https://www.digischool.fr/articles/_next/image/?url=https%3A%2F%2Fwww.digischool.fr%2Farticles%2Fwp-content%2Fuploads%2F2023%2F01%2FAdobeStock_291450666-min-scaled.jpeg&w=1920&q=75', 'Welcome to our Comprehensive TOEIC Preparation Course!
 
 This course is your roadmap to success in the Test of English for International Communication (TOEIC). We’ll walk you through each component of the test - Listening and Reading - equipping you with effective strategies to boost your performance.
 
@@ -243,7 +248,7 @@ You’ll gain access to a wide range of practice materials, sample responses, an
 Whether you’re just beginning your TOEIC journey or you’re an advanced learner aiming for a high score, this course is designed to cater to all levels of proficiency.
 
 So, let’s set sail on this exciting journey towards achieving TOEIC success! Your pathway to a top-notch TOEIC score begins here.', 32.99, 17, 2);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (18, 'Tom Wallace | English', 'https://yt3.ggpht.com/wFCH3MYo5ELdXZHM2q-BAa5KiTaOEZGlu1QIYCv7qNwWY8yS-tEAZXLsVdxztRhvrbTLSNks2Q=s88-c-k-c0x00ffffff-no-rj', 'Welcome to our Ultimate TOEIC Success Course!
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (18, 'Tom Wallace | English', 'https://haenglish.edu.vn/wp-content/uploads/2023/07/toeic1-16831725956141313509937.jpg', 'Welcome to our Ultimate TOEIC Success Course!
 
 This course is your comprehensive guide to acing the Test of English for International Communication (TOEIC). We’ll navigate through each section of the test - Listening and Reading - providing you with effective strategies to enhance your performance.
 
@@ -261,7 +266,7 @@ You’ll be provided with a plethora of practice materials, sample responses, an
 Whether you’re a novice just starting your TOEIC adventure or an advanced learner aiming for a perfect score, this course is designed to cater to all proficiency levels.
 
 So, let’s embark on this exciting journey towards achieving TOEIC triumph! Your pursuit of a top-tier TOEIC score starts now.', 23.5, 19, 2);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (20, 'Goodwin TOEIC', 'https://yt3.ggpht.com/ytc/APkrFKbijv9ocM6uXXGhTdWrykRDYxlxsdg4pshfx7L9=s88-c-k-c0x00ffffff-no-rj', 'Welcome to our TOEIC Excellence Course!
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (20, 'Goodwin TOEIC', 'https://tiki.vn/blog/wp-content/uploads/2023/07/toeic.jpg', 'Welcome to our TOEIC Excellence Course!
 
 This course is your comprehensive guide to mastering the Test of English for International Communication (TOEIC). We’ll cover all aspects of the test - Listening and Reading - providing you with the tools and strategies needed to achieve a high score.
 
@@ -312,7 +317,7 @@ But that’s not all! We also offer live sessions where you can interact with ou
 Whether you’re a beginner embarking on your IELTS journey or an advanced learner aiming for a band 9 score, this course is designed to cater to all levels of proficiency. Our dedicated team of instructors is committed to providing you with the support and guidance you need to achieve your IELTS goals.
 
 So, let’s embark on this exciting journey towards mastering the IELTS! Your pathway to achieving a top-tier IELTS score begins here.', 72, 23, 1);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (24, 'Fastrack IELTS', 'https://yt3.googleusercontent.com/ytc/APkrFKZPxd95iaQpCOq3nCWJNAxvJBfqqh6ccGQyAMInZQ=s176-c-k-c0x00ffffff-no-rj', 'Welcome to our Elite IELTS Preparation Course!
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (24, 'Fastrack IELTS', 'https://yt3.googleusercontent.com/iy8jePu3dpiDBkSDH8vNd5y9QoOnolh8IGm2KP4N2Tzxtn0Na9gtkOWTv-HfT8moj_mR03Cp7Q=s900-c-k-c0x00ffffff-no-rj', 'Welcome to our Elite IELTS Preparation Course!
 
 This course is your ultimate guide to achieving exceptional results in the International English Language Testing System (IELTS). We’ll delve into each component of the test - Listening, Reading, Writing, and Speaking - providing you with the tools and strategies needed to optimize your performance.
 
@@ -325,7 +330,7 @@ But we don’t stop there! We also offer live sessions where you can interact wi
 Whether you’re a beginner embarking on your IELTS journey or an advanced learner aiming for a band 9 score, this course is designed to cater to all levels of proficiency. Our dedicated team of instructors is committed to providing you with the support and guidance you need to achieve your IELTS goals.
 
 So, let’s embark on this exciting journey towards mastering the IELTS! Your pathway to achieving a top-tier IELTS score begins here.', 70, 24, 1);
-INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (25, 'Keith IELTS Success', 'https://yt3.ggpht.com/ytc/APkrFKYcZz6CJBKJhZG-DruJipgce9t1qQrnAVpz_ETRpw=s88-c-k-c0x00ffffff-no-rj', 'Welcome to our Advanced IELTS Preparation Course!
+INSERT INTO thecoach.courses (id, name, image, description, price, app_user_id, course_type_id) VALUES (25, 'Keith IELTS Success', 'https://keithspeakingacademy.com/wp-content/uploads/2023/05/Keith_Web.png', 'Welcome to our Advanced IELTS Preparation Course!
 
 This course is your comprehensive guide to excelling in the International English Language Testing System (IELTS). We’ll cover all four components of the test - Listening, Reading, Writing, and Speaking - providing you with effective strategies and techniques to enhance your performance.
 
@@ -338,6 +343,8 @@ In addition, we’ll provide you with insights into the test format and scoring 
 Whether you’re a beginner embarking on your IELTS journey or an advanced learner aiming for a band 9 score, this course is designed to cater to all levels of proficiency. Our dedicated team of instructors is committed to providing you with the support and guidance you need to achieve your IELTS goals.
 
 So, let’s embark on this exciting journey towards mastering the IELTS! Your pathway to achieving a top-tier IELTS score begins here.', 79, 25, 1);
+
+
 
 
 -- videos
@@ -446,11 +453,11 @@ INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) V
 INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (103, 21, 'Most Band 9 Students Use These 20 Words', 'https://www.youtube.com/watch?v=AaZvMJNxALs&ab_channel=IELTSAdvantage', false, 'https://www.youtube.com/watch?v=AaZvMJNxALs&ab_channel=IELTSAdvantage');
 INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (104, 21, 'How Do I Get a Band 9 in IELTS Writing Task 2?', 'https://www.youtube.com/watch?v=1aQZ7_tfgps&list=PLWWR_9t3vo3MPSTuHt5gnHRY-qXbGIIS8&ab_channel=IELTSAdvantage', false, 'https://www.youtube.com/watch?v=1aQZ7_tfgps&list=PLWWR_9t3vo3MPSTuHt5gnHRY-qXbGIIS8&ab_channel=IELTSAdvantage');
 INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (105, 21, 'Key Insights after Marking Over 10,000 Essays', 'https://www.youtube.com/watch?v=kpRmyUNDmwc&ab_channel=IELTSAdvantage', false, 'https://www.youtube.com/watch?v=kpRmyUNDmwc&ab_channel=IELTSAdvantage');
-INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (106, 22, 'SOMETHING YOU BORROWED - IELTS part 2 - Ideas (re-release)', 'https://www.youtube.com/watch?v=N2kiI4RN0tQ&ab_channel=IELTSDaily', true, 'https://www.youtube.com/watch?v=N2kiI4RN0tQ&ab_channel=IELTSDaily');
-INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (107, 22, 'IELTS Speaking Part 1 - Rapid Fire Questions - Saskia - 6 Topics!', 'https://www.youtube.com/watch?v=-TmWfr18D20&list=RDCMUC39W_uzNjIAIYrimiKkI-rA&index=9&ab_channel=IELTSDaily', false, 'https://www.youtube.com/watch?v=-TmWfr18D20&list=RDCMUC39W_uzNjIAIYrimiKkI-rA&index=9&ab_channel=IELTSDaily');
-INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (108, 22, 'AN ANIMAL YOU REMEMBER - IELTS part 2 - Ideas (re-release)', 'https://www.youtube.com/watch?v=fox4c_VJJD4&list=RDCMUC39W_uzNjIAIYrimiKkI-rA&index=10&ab_channel=IELTSDaily', false, 'https://www.youtube.com/watch?v=fox4c_VJJD4&list=RDCMUC39W_uzNjIAIYrimiKkI-rA&index=10&ab_channel=IELTSDaily');
-INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (109, 22, 'A CROWDED PLACE — IELTS Speaking Part 2 — Teacher Model Answer Recent Question!', 'https://www.youtube.com/watch?v=WtnMRgiCOEk&list=RDCMUC39W_uzNjIAIYrimiKkI-rA&index=16&ab_channel=IELTSDaily', false, 'https://www.youtube.com/watch?v=WtnMRgiCOEk&list=RDCMUC39W_uzNjIAIYrimiKkI-rA&index=16&ab_channel=IELTSDaily');
-INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (110, 22, 'TOYS / BOREDOM — IELTS Speaking Part 3 — Teacher model answer', 'https://www.youtube.com/watch?v=5cm0iVOG8-Y&list=RDCMUC39W_uzNjIAIYrimiKkI-rA&index=21&ab_channel=IELTSDaily', false, 'https://www.youtube.com/watch?v=5cm0iVOG8-Y&list=RDCMUC39W_uzNjIAIYrimiKkI-rA&index=21&ab_channel=IELTSDaily');
+INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (106, 22, 'The quiet power of introverts | BBC Ideas', 'https://www.youtube.com/watch?v=o1Y4Z0oh1GE&ab_channel=BBCIdeas', true, 'https://www.youtube.com/watch?v=o1Y4Z0oh1GE&ab_channel=BBCIdeas');
+INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (107, 22, '5 Advanced Idioms for IELTS Speaking', 'https://www.youtube.com/watch?v=up8YOiCgz8Q&ab_channel=EnglishSpeakingSuccess', false, 'https://www.youtube.com/watch?v=up8YOiCgz8Q&ab_channel=EnglishSpeakingSuccess');
+INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (108, 22, '15 Useful Phrases for IELTS Speaking PART 1', 'https://www.youtube.com/watch?v=lITCDZGepmg&t=9s&ab_channel=EnglishSpeakingSuccess', false, 'https://www.youtube.com/watch?v=lITCDZGepmg&t=9s&ab_channel=EnglishSpeakingSuccess');
+INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (109, 22, '20 Essential English Phrases to talk about The Economy', 'https://www.youtube.com/watch?v=jjHrmSyew8M&ab_channel=EnglishSpeakingSuccess', false, 'https://www.youtube.com/watch?v=jjHrmSyew8M&ab_channel=EnglishSpeakingSuccess');
+INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (110, 22, 'Describing Books in English: Essential Idioms', 'https://www.youtube.com/watch?v=xbhqcffTEt8&ab_channel=EnglishSpeakingSuccess', false, 'https://www.youtube.com/watch?v=xbhqcffTEt8&ab_channel=EnglishSpeakingSuccess');
 INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (111, 23, 'How to Prepare for IELTS FAST', 'https://www.youtube.com/watch?v=UNwa3Iw0c4E&ab_channel=E2IELTS', true, 'https://www.youtube.com/watch?v=UNwa3Iw0c4E&ab_channel=E2IELTS');
 INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (112, 23, 'IELTS Reading Test - Tips & Strategies for True, False, Not Given', 'https://www.youtube.com/watch?v=aLLTq-l0IeY&list=RDCMUCglDIsg_Z9mE2oT9hsrbzFA&index=1&ab_channel=E2IELTS', false, 'https://www.youtube.com/watch?v=aLLTq-l0IeY&list=RDCMUCglDIsg_Z9mE2oT9hsrbzFA&index=1&ab_channel=E2IELTS');
 INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (113, 23, 'IELTS Reading: Don\'t Make These 10 Mistakes!', 'https://www.youtube.com/watch?v=1-NajlaQajg&list=RDCMUCglDIsg_Z9mE2oT9hsrbzFA&index=2&ab_channel=E2IELTS', false, 'https://www.youtube.com/watch?v=1-NajlaQajg&list=RDCMUCglDIsg_Z9mE2oT9hsrbzFA&index=2&ab_channel=E2IELTS');
@@ -466,3 +473,6 @@ INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) V
 INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (123, 25, '10 Useful PHRASAL VERBS for Any Topic in IELTS Speaking', 'https://www.youtube.com/watch?v=xwy3_Ifmp9g&ab_channel=EnglishSpeakingSuccess', false, 'https://www.youtube.com/watch?v=xwy3_Ifmp9g&ab_channel=EnglishSpeakingSuccess');
 INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (124, 25, 'IELTS Speaking Part 2: Awesome Tips and Useful Phrases', 'https://www.youtube.com/watch?v=XCDdGC3_BZ8&ab_channel=EnglishSpeakingSuccess', false, 'https://www.youtube.com/watch?v=XCDdGC3_BZ8&ab_channel=EnglishSpeakingSuccess');
 INSERT INTO thecoach.videos (id, course_id, title, urlPath, is_free, url_path) VALUES (125, 25, 'Useful IDIOMS for Any Topic in IELTS Speaking', 'https://www.youtube.com/watch?v=6zoe5WQ1c8E&list=RDCMUCiVm8XcbwS8-pcDEa5lFXIA&index=6&ab_channel=EnglishSpeakingSuccess', false, 'https://www.youtube.com/watch?v=6zoe5WQ1c8E&list=RDCMUCiVm8XcbwS8-pcDEa5lFXIA&index=6&ab_channel=EnglishSpeakingSuccess');
+
+
+

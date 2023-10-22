@@ -31,6 +31,7 @@ public class WebSecurityConfig {
                 .antMatchers(
                         //All role
                         "/api/auth/**",
+
                         "/courses/**",
                         "/videos/**",
                         "/carts/**",
@@ -38,14 +39,17 @@ public class WebSecurityConfig {
                         "/favorites/**",
                         "/purchases/**",
                         "/comments/all",
-                        "/check"
+                        "/check",
+                        "/comments/review",
+                        "/questions/**"
 
                 ).permitAll()
                 .antMatchers(
 
+
                         "/api/students/**",
-                        "/api/instructors/**",
-                        "/comments/review"
+                        "/api/instructors/**"
+
 
                 ).hasAnyAuthority("ROLE_INSTRUCTOR", "ROLE_STUDENT")
 

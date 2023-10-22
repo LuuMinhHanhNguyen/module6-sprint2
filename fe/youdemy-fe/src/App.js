@@ -10,7 +10,8 @@ import Favorite from "./components/Favorite";
 import Billing from "./components/Billing";
 import { axiosClient } from "./service/AxiosClient";
 import MyLearning from "./components/MyLearning";
-import Header from "./components/Header";
+import PaginatedItems from "./components/PaginatedItems";
+import PurchaseHistory from "./components/PurchaseHistory";
 
 function App() {
   axiosClient();
@@ -25,6 +26,8 @@ function App() {
         <Route path="/favorites" element={<Favorite />}></Route>
         <Route path="/success" element={<Billing />}></Route>
         <Route path="/my-learning" element={<MyLearning />}></Route>
+        <Route path="/search" element={<PaginatedItems />}></Route>
+        <Route path="/purchase-history" element={<PurchaseHistory />}></Route>
       </Routes>
     </>
   );

@@ -68,6 +68,7 @@ CREATE TABLE comments (
     app_user_id bigint,
     comment_text longtext,
     comment_date varchar(255),
+    rating int,
     FOREIGN KEY (course_id) REFERENCES courses(id),
     FOREIGN KEY (app_user_id) REFERENCES app_user(id)
 );
@@ -99,13 +100,34 @@ id bigint auto_increment primary key,
     FOREIGN KEY (course_id) REFERENCES courses(id)
 ); 
 
-CREATE TABLE course_ratings (
+CREATE TABLE questions (
     id bigint auto_increment primary key,
-    rating_value int not null,
-    app_user_id bigint,
     course_id bigint,
-    FOREIGN KEY (app_user_id) REFERENCES app_user(id),
-    FOREIGN KEY (course_id) REFERENCES courses(id)
+    app_user_id bigint,
+    question_text longtext,
+    question_date varchar(255),
+    FOREIGN KEY (course_id) REFERENCES courses(id),
+    FOREIGN KEY (app_user_id) REFERENCES app_user(id)
+);
+
+CREATE TABLE questions (
+    id bigint auto_increment primary key,
+    course_id bigint,
+    app_user_id bigint,
+    question_text longtext,
+    question_date varchar(255),
+    FOREIGN KEY (course_id) REFERENCES courses(id),
+    FOREIGN KEY (app_user_id) REFERENCES app_user(id)
+);
+
+CREATE TABLE answers (
+    id bigint auto_increment primary key,
+    question_id bigint,
+    app_user_id bigint,
+    answer_text longtext,
+    answer_date varchar(255),
+    FOREIGN KEY (question_id) REFERENCES questions(id),
+    FOREIGN KEY (app_user_id) REFERENCES app_user(id)
 );
 
 

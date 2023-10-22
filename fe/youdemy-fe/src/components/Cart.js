@@ -134,6 +134,7 @@ export default function Cart() {
   useEffect(() => {
     if (appUser.id) {
       loadAllCarts(appUser.id);
+      window.scrollTo(0, 0);
     }
   }, [appUser.id, isUpdated]);
 
@@ -207,7 +208,11 @@ export default function Cart() {
                                           value={el.averageRating}
                                           {...firstExample}
                                         />
-                                        ({el.numOfRating} ratings)
+                                        ({el.numOfRating}{" "}
+                                        {el.numOfRating > 1
+                                          ? "ratings"
+                                          : "rating"}
+                                        )
                                       </small>
                                       <small className="d-inline-block">
                                         {el.numOfVideo} lectures • All levels •{" "}

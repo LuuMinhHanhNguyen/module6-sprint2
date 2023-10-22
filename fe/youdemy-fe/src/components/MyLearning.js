@@ -6,6 +6,7 @@ import { AiFillHeart } from "react-icons/ai";
 import Header from "./Header";
 import Footer from "./Footer";
 import ReactStars from "react-rating-stars-component";
+import SubSection from "./SubSection";
 
 export default function MyLearning() {
   const [appUser, setAppUser] = useState({});
@@ -40,6 +41,7 @@ export default function MyLearning() {
   useEffect(() => {
     if (appUser.id) {
       loadMyCourses(appUser.id);
+      window.scrollTo(0, 0);
     }
   }, [appUser.id]);
 
@@ -110,7 +112,8 @@ export default function MyLearning() {
                         value={el.averageRating}
                         {...firstExample}
                       />
-                      ({el.numOfRating} ratings)
+                      ({el.numOfRating}{" "}
+                      {el.numOfRating > 1 ? "ratings" : "rating"})
                     </small>
                     <small className="d-inline-block">
                       {el.numOfVideo} lectures • All levels • {el.numOfStudent}{" "}
@@ -137,6 +140,7 @@ export default function MyLearning() {
           </>
         )}
       </div>
+      <SubSection />
       <Footer />
     </>
   );
