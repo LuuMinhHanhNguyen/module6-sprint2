@@ -1,8 +1,8 @@
 import axios from "axios";
 
-export async function getAllQuestions(courseId) {
+export async function getAllQuestions(courseId, sortBy) {
   const res = await axios.get(
-    `http://localhost:8080/questions/all?courseId=${courseId}`
+    `http://localhost:8080/questions/all?courseId=${courseId}&sortBy=${sortBy}`
   );
   return res.data;
 }

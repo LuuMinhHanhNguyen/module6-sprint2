@@ -14,7 +14,15 @@ import java.util.List;
 @Repository
 public interface IQuestionRepository extends JpaRepository<Question,Long> {
 
-    List<Question> findAllByCourse_Id(@Param("courseId") Long courseId);
+    @Query(nativeQuery = true, value = " SELECT q.* " +
+            "FROM questions q " +
+            "WHERE q.course_id = :courseId " +
+            "ORDER BY " +
+            "    CASE " +
+            "        WHEN :sortBy = 'newest' THEN q.id " +
+            "        WHEN :sortBy = 'top' THEN (SELECT COUNT(*) FROM question_like ql WHERE ql.question_id = q.id) " +
+            "    END DESC " )
+    List<Question> findAllByCourse_Id(@Param("courseId") Long courseId, @Param("sortBy") String sortBy);
 
     @Transactional
     @Modifying

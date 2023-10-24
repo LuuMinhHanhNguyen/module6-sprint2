@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class AnswerController {
     @Autowired
     private IAnswerService iAnswerService;
-    
+
 
 //        @GetMapping("/all")
 //        public ResponseEntity getAllQuestion(@RequestParam("courseId") Long courseId){
@@ -31,4 +31,6 @@ public class AnswerController {
         iAnswerService.saveReply(appUserId,questionId,answerText);
         return new ResponseEntity<>( HttpStatus.OK);
     }
+
+
 }

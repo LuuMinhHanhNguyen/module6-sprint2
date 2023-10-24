@@ -23,6 +23,14 @@ public class Answer {
     public Answer() {
     }
 
+    public Answer(Long id, String answerText, String answerDate, Question question, AppUser appUser) {
+        this.id = id;
+        this.answerText = answerText;
+        this.answerDate = answerDate;
+        this.question = question;
+        this.appUser = appUser;
+    }
+
     public String getAnswerText() {
         return answerText;
     }

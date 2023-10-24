@@ -204,11 +204,6 @@ export default function PaginatedItems() {
     });
   };
 
-  // const loadAllCourses = async () => {
-  //   const data = await searchCourse(searchInfo);
-  //   setCourses(data);
-  //   console.log(data);
-  // };
 
   const loadCourseTypes = async () => {
     const data = await getCourseTypes();

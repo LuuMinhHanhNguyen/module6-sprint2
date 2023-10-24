@@ -100,15 +100,15 @@ id bigint auto_increment primary key,
     FOREIGN KEY (course_id) REFERENCES courses(id)
 ); 
 
-CREATE TABLE questions (
-    id bigint auto_increment primary key,
-    course_id bigint,
-    app_user_id bigint,
-    question_text longtext,
-    question_date varchar(255),
-    FOREIGN KEY (course_id) REFERENCES courses(id),
-    FOREIGN KEY (app_user_id) REFERENCES app_user(id)
-);
+-- CREATE TABLE questions (
+--     id bigint auto_increment primary key,
+--     course_id bigint,
+--     app_user_id bigint,
+--     question_text longtext,
+--     question_date varchar(255),
+--     FOREIGN KEY (course_id) REFERENCES courses(id),
+--     FOREIGN KEY (app_user_id) REFERENCES app_user(id)
+-- );
 
 CREATE TABLE questions (
     id bigint auto_increment primary key,
@@ -127,6 +127,22 @@ CREATE TABLE answers (
     answer_text longtext,
     answer_date varchar(255),
     FOREIGN KEY (question_id) REFERENCES questions(id),
+    FOREIGN KEY (app_user_id) REFERENCES app_user(id)
+);
+
+CREATE TABLE question_likes (
+    id bigint auto_increment primary key,
+    question_id bigint,
+    app_user_id bigint,
+    FOREIGN KEY (question_id) REFERENCES questions(id),
+    FOREIGN KEY (app_user_id) REFERENCES app_user(id)
+);
+
+CREATE TABLE answer_likes (
+    id bigint auto_increment primary key,
+    answer_id bigint,
+    app_user_id bigint,
+    FOREIGN KEY (answer_id) REFERENCES answers(id),
     FOREIGN KEY (app_user_id) REFERENCES app_user(id)
 );
 

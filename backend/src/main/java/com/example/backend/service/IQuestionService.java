@@ -1,13 +1,14 @@
 package com.example.backend.service;
 
 import com.example.backend.model.Question;
-import org.springframework.data.repository.query.Param;
+import com.example.backend.projection.QuestionDTO;
+
 
 import java.util.List;
 
 public interface IQuestionService {
 
-    List<Question> findAllByCourse_Id(Long courseId);
+    List<QuestionDTO> findAllByCourse_Id(Long courseId, String sortBy);
 
     int saveQuestion(Long appUserId, Long courseId,
                     String questionText);

@@ -15,6 +15,8 @@ import {
   AiOutlineLike,
   AiFillLike,
 } from "react-icons/ai";
+import { FiList } from "react-icons/fi";
+
 import { FiLock } from "react-icons/fi";
 import "../css/details.css";
 import { checkFavorites, addToFavorites } from "../service/FavoriteService";
@@ -29,6 +31,12 @@ import { findAllCarts } from "../redux/cartAction";
 import { getAllComments, saveComment } from "../service/CommentService";
 import { saveQuestion, getAllQuestions } from "../service/QuestionService";
 import { saveReply } from "../service/AnswerService";
+import {
+  saveQuestionLike,
+  getQuestionLikes,
+} from "../service/QuestionLikeService";
+
+import { saveAnswerLike, getAnswerLikes } from "../service/AnswerLikeService";
 import ReactStars from "react-rating-stars-component";
 import TextareaAutosize from "react-textarea-autosize";
 
@@ -50,7 +58,10 @@ export default function Details() {
   const [showICons, setShowIcons] = useState(false);
   const [randomColor, setRandomColor] = useState("");
   const [questions, setQuestions] = useState([]);
-  const [replyText, setReplyText] = useState("");
+  const [numOfComments, setNumOfComments] = useState(0);
+  const [questionLikes, setQuestionLikes] = useState([]);
+  const [answerLikes, setAnswerLikes] = useState([]);
+  const [sortBy, setSortBy] = useState("newest");
 
   useEffect(() => {
     setRandomColor(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
@@ -59,10 +70,6 @@ export default function Details() {
   const onClick = (emojiData, event) => {
     console.log(emojiData.emoji);
     setText((currentText) => currentText + emojiData.emoji);
-  };
-  const onReplyClick = (emojiData, event) => {
-    console.log(emojiData.emoji);
-    setReplyText((currentText) => currentText + emojiData.emoji);
   };
 
   const firstExample = {
@@ -123,7 +130,7 @@ export default function Details() {
     console.log(data);
   };
 
-  const loadComments = async () => {
+  const loadReviews = async () => {
     // this is the {id} from useParams
     const data = await getAllComments(id);
     setComments(data.comments);
@@ -132,8 +139,27 @@ export default function Details() {
 
   const loadQuestions = async () => {
     // this is the {id} from useParams
-    const data = await getAllQuestions(id);
+    const data = await getAllQuestions(id, sortBy);
     setQuestions(data);
+    console.log(data);
+    let totalNum = data.length;
+    data.map((el) => (totalNum += el.answers.length));
+    setNumOfComments(totalNum);
+  };
+
+  const loadQuestionLikes = async () => {
+    // this is the {id} from useParams
+    const data = await getQuestionLikes(appUser.id, id);
+    setQuestionLikes(data);
+    console.log("question likessss");
+    console.log(data);
+  };
+
+  const loadAnswerLikes = async () => {
+    // this is the {id} from useParams
+    const data = await getAnswerLikes(appUser.id, id);
+    setAnswerLikes(data);
+    console.log("answer likessss");
     console.log(data);
   };
 
@@ -237,6 +263,43 @@ export default function Details() {
     Swal.fire("Thank You For Your Reply! ❤️ ", "", "success");
   };
 
+  const handleSubmitMiniReply = async (questionId, answerId) => {
+    const text = document.getElementById(`miniReplyText-${answerId}`).value;
+    const data = await saveReply(appUser.id, questionId, text);
+    setIsUpdated(!isUpdated);
+    document.getElementById(`miniReplyText-${answerId}`).value = "";
+    document.getElementById(`miniRep-${answerId}`).style.display = "none";
+    Swal.fire("Thank You For Your Reply! ❤️ ", "", "success");
+  };
+
+  const handleQuestionLike = async (questionId) => {
+    if (!appUser.id) {
+      Swal.fire("You need to sign in first!", "", "warning");
+      navigate("/log-in");
+    } else {
+      const data = await saveQuestionLike(appUser.id, questionId);
+      setIsUpdated(!isUpdated);
+      Swal.fire("Thank You For Your Liking! ❤️ ", "", "success");
+    }
+  };
+
+  const handleAnswerLike = async (answerId) => {
+    if (!appUser.id) {
+      Swal.fire("You need to sign in first!", "", "warning");
+      navigate("/log-in");
+    } else {
+      const data = await saveAnswerLike(appUser.id, answerId);
+      setIsUpdated(!isUpdated);
+      Swal.fire("Thank You For Your Liking! ❤️ ", "", "success");
+    }
+  };
+
+  const handleSortByChange = (event) => {
+    console.log(event.target.value);
+    setSortBy(event.target.value);
+    setIsUpdated(!isUpdated);
+  };
+
   useEffect(() => {
     if (appUser.id) {
       loadMyCourses(appUser.id);
@@ -260,9 +323,24 @@ export default function Details() {
   }, [appUser.id, course.id, isUpdated]);
 
   useEffect(() => {
-    loadQuestions();
-    loadComments();
+    loadReviews();
   }, [isUpdated]);
+
+  useEffect(() => {
+    loadQuestions();
+  }, [isUpdated]);
+
+  useEffect(() => {
+    if (appUser.id) {
+      loadQuestionLikes();
+    }
+  }, [isUpdated, appUser.id]);
+
+  useEffect(() => {
+    if (appUser.id) {
+      loadAnswerLikes();
+    }
+  }, [isUpdated, appUser.id]);
 
   return (
     <>
@@ -415,7 +493,36 @@ export default function Details() {
                 {/* comments sec */}
                 <hr className=" my-5"></hr>
                 <section>
-                  <h1 className="mb-4">777 comments Sort by</h1>
+                  <div className=" d-flex align-items-center mb-4">
+                    <h3 className=" fw-bold">
+                      {numOfComments}{" "}
+                      {numOfComments > 1 ? "comments" : "comment"}{" "}
+                    </h3>
+                    <div
+                      className=" d-flex flex-column align-items-start mx-5 px-3 py-2"
+                      style={{
+                        border: "1px solid #5b85d1",
+                        color: "#5b85d1",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <div className=" d-flex ">
+                        <FiList className="fw-bold"></FiList>
+                        <small className=" fw-bold mx-1 ">Sort by</small>
+                      </div>
+                      <select
+                        onChange={(event) => handleSortByChange(event)}
+                        name="sortBy"
+                        id="sortBy"
+                        className=" border-0"
+                        style={{ color: "#5b85d1", outline: "none" }}
+                      >
+                        <option value="newest">Newest first</option>
+                        <option value="top">Top comments</option>
+                      </select>
+                    </div>
+                  </div>
+
                   <div className=" d-flex flex-column align-items-center mb-5">
                     <div className=" d-flex align-items-center w-100">
                       <Avatar
@@ -439,20 +546,23 @@ export default function Details() {
                       />
                     </div>
                     {text.length > 0 && (
-                      <div className=" d-flex  justify-content-between w-100 px-5">
-                        <div>
-                          <AiOutlineSmile
-                            size={25}
-                            onClick={() => setShowIcons((prev) => !prev)}
-                          ></AiOutlineSmile>
-                          {showICons && (
-                            <EmojiPicker
-                              onEmojiClick={onClick}
-                              autoFocusSearch={false}
-                              emojiStyle={EmojiStyle.NATIVE}
-                            />
-                          )}
+                      <div className=" d-flex  justify-content-between w-100 px-5 ">
+                        <div className=" position-relative">
+                          <div className=" position-absolute">
+                            <AiOutlineSmile
+                              size={25}
+                              onClick={() => setShowIcons((prev) => !prev)}
+                            ></AiOutlineSmile>
+                            {showICons && (
+                              <EmojiPicker
+                                onEmojiClick={onClick}
+                                autoFocusSearch={false}
+                                emojiStyle={EmojiStyle.NATIVE}
+                              />
+                            )}
+                          </div>
                         </div>
+
                         <div className="d-flex align-items-start">
                           <button
                             className="btn"
@@ -476,163 +586,394 @@ export default function Details() {
                   </div>
 
                   {questions.length > 0 &&
-                    questions
-                      .slice()
-                      .reverse()
-                      .map((el) => {
-                        return (
-                          <>
-                            <div className=" d-flex  align-items-start mb-4 ">
-                              <div>
-                                <Avatar
-                                  name={el.appUser.userName}
-                                  round={true}
-                                  size="40"
-                                  className=" me-2"
-                                  color={randomColor}
-                                />
-                              </div>
-                              <div className=" px-2 d-flex flex-column align-items-start justify-content-start flex-grow-1">
-                                <p className="m-0 fw-bold">
-                                  {el.appUser.userName}{" "}
-                                  <small>{el.questionDate}</small>
-                                </p>
-                                <p className="m-0">{el.questionText}</p>
-                                <div>
-                                  <AiOutlineLike
-                                    style={{ cursor: "pointer" }}
-                                  ></AiOutlineLike>
-                                  <small className=" ms-1 fw-bold">77</small>
-                                  <button
-                                    className="ms-3 btn fw-bold"
-                                    onClick={() => {
-                                      console.log("heeeeerere");
-                                      let element = document.getElementById(
-                                        `rep-${el.id}`
-                                      );
-                                      if (element.style.display === "none") {
-                                        element.style.display = "block";
-                                      } else {
-                                        element.style.display = "none";
+                    questions.map((el) => {
+                      return (
+                        <div
+                          key={`question-${el.question.id}`}
+                          className=" d-flex  align-items-start mb-4 "
+                        >
+                          <div>
+                            <Avatar
+                              name={el.question.appUser.userName}
+                              round={true}
+                              size="40"
+                              className=" me-2"
+                              color={randomColor}
+                            />
+                          </div>
+                          <div className=" px-2 d-flex flex-column align-items-start justify-content-start flex-grow-1">
+                            <p className="m-0 fw-bold">
+                              {el.question.appUser.userName}{" "}
+                              <small>{el.question.questionDate}</small>
+                            </p>
+                            <p className="m-0">{el.question.questionText}</p>
+                            <div>
+                              {questionLikes.length > 0 &&
+                              questionLikes.find(
+                                (temp) => temp.question.id == el.question.id
+                              ) ? (
+                                <AiFillLike
+                                  onClick={() =>
+                                    handleQuestionLike(el.question.id)
+                                  }
+                                  style={{ cursor: "pointer" }}
+                                ></AiFillLike>
+                              ) : (
+                                <AiOutlineLike
+                                  onClick={() =>
+                                    handleQuestionLike(el.question.id)
+                                  }
+                                  style={{ cursor: "pointer" }}
+                                ></AiOutlineLike>
+                              )}
+
+                              <small className=" ms-1 fw-bold">
+                                {el.likes > 0 && el.likes}
+                              </small>
+                              <button
+                                className="ms-3 btn fw-bold"
+                                onClick={() => {
+                                  if (appUser.id) {
+                                    console.log("heeeeerere");
+                                    let element = document.getElementById(
+                                      `rep-${el.question.id}`
+                                    );
+                                    if (element.style.display === "none") {
+                                      element.style.display = "block";
+                                    } else {
+                                      element.style.display = "none";
+                                    }
+                                  } else {
+                                    Swal.fire(
+                                      "Please sign in your account!",
+                                      "",
+                                      "warning"
+                                    );
+                                    navigate("/log-in");
+                                  }
+                                }}
+                              >
+                                Reply
+                              </button>
+                            </div>
+
+                            <div
+                              className="reply-section p-0 m-0 mt-4 w-100"
+                              style={{
+                                display: "none",
+                              }}
+                              id={`rep-${el.question.id}`}
+                            >
+                              <div className=" d-flex flex-column align-items-start w-100">
+                                <div className=" d-flex align-items-center w-100">
+                                  <Avatar
+                                    name={appUser.id ? appUser.userName : ""}
+                                    round={true}
+                                    size="40"
+                                    className=" me-2"
+                                    color={randomColor}
+                                  />
+
+                                  <div className="d-flex w-100 flex-grow-1">
+                                    <TextareaAutosize
+                                      id={`replyText-${el.question.id}`}
+                                      style={{
+                                        width: "100%",
+                                        border: "none",
+                                        borderBottom: "1px solid black",
+                                      }}
+                                      className=" px-2 w-100 flex-grow-1"
+                                      onChange={(event) =>
+                                        (document.getElementById(
+                                          `replyText-${el.question.id}`
+                                        ).value = event.target.value)
                                       }
-                                    }}
-                                  >
-                                    Reply
-                                  </button>
+                                      defaultValue=""
+                                      placeholder="Add a reply..."
+                                    />
+                                  </div>
                                 </div>
-                                <div
-                                  className="reply-section p-0 m-0 my-3 w-100"
-                                  style={{
-                                    display: "none",
-                                  }}
-                                  id={`rep-${el.id}`}
-                                >
-                                  <div className=" d-flex flex-column align-items-start w-100">
-                                    <div className=" d-flex align-items-center w-100">
-                                      <Avatar
-                                        name={
-                                          appUser.id ? appUser.userName : ""
+
+                                <div className=" d-flex  justify-content-between w-100 px-5 position-relative">
+                                  <div>
+                                    <AiOutlineSmile
+                                      size={25}
+                                      onClick={() => {
+                                        console.log("heeeeerere");
+                                        let element = document.getElementById(
+                                          `icon-${el.question.id}`
+                                        );
+                                        if (element.style.display === "none") {
+                                          element.style.display = "block";
+                                        } else {
+                                          element.style.display = "none";
                                         }
+                                      }}
+                                    ></AiOutlineSmile>
+
+                                    <div
+                                      id={`icon-${el.question.id}`}
+                                      style={{
+                                        position: "absolute",
+                                        display: "none",
+                                        zIndex: "9999",
+                                      }}
+                                    >
+                                      <EmojiPicker
+                                        onEmojiClick={(emojiData, event) => {
+                                          document.getElementById(
+                                            `replyText-${el.question.id}`
+                                          ).value += emojiData.emoji;
+                                        }}
+                                        autoFocusSearch={false}
+                                        emojiStyle={EmojiStyle.NATIVE}
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="d-flex align-items-start">
+                                    <button
+                                      className="btn"
+                                      onClick={() => {
+                                        setShowIcons(false);
+                                        document.getElementById(
+                                          `rep-${el.question.id}`
+                                        ).style.display = "none";
+                                        document.getElementById(
+                                          `replyText-${el.question.id}`
+                                        ).value = "";
+                                      }}
+                                    >
+                                      Cancel
+                                    </button>
+                                    <button
+                                      className="btn btn-outline-primary back-btn "
+                                      style={{ borderRadius: "100px" }}
+                                      onClick={() =>
+                                        handleSubmitReply(el.question.id)
+                                      }
+                                    >
+                                      Comment
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* answers section mini */}
+                            {el.answers.map((temp) => {
+                              return (
+                                <>
+                                  <div className=" d-flex  align-items-start m-0 mb-1 w-100">
+                                    <div>
+                                      <Avatar
+                                        name={temp.answer.appUser.userName}
                                         round={true}
                                         size="40"
                                         className=" me-2"
                                         color={randomColor}
                                       />
-
-                                      <div className="d-flex w-100 flex-grow-1">
-                                        <TextareaAutosize
-                                          id={`replyText-${el.id}`}
-                                          style={{
-                                            width: "100%",
-                                            border: "none",
-                                            borderBottom: "1px solid black",
-                                          }}
-                                          className=" px-2 w-100 flex-grow-1"
-                                          onChange={(event) =>
-                                            (document.getElementById(
-                                              `replyText-${el.id}`
-                                            ).value = event.target.value)
-                                          }
-                                          defaultValue=""
-                                          placeholder="Add a reply..."
-                                        />
-                                      </div>
                                     </div>
-
-                                    <div className=" d-flex  justify-content-between w-100 px-5 position-relative">
+                                    <div className=" px-2 d-flex flex-column align-items-start justify-content-start flex-grow-1">
+                                      <p className="m-0 fw-bold">
+                                        {temp.answer.appUser.userName}{" "}
+                                        <small>{temp.answer.answerDate}</small>
+                                      </p>
+                                      <p className="m-0">
+                                        {temp.answer.answerText}
+                                      </p>
                                       <div>
-                                        <AiOutlineSmile
-                                          size={25}
+                                        {answerLikes.length > 0 &&
+                                        answerLikes.find(
+                                          (temp1) =>
+                                            temp1.answer.id == temp.answer.id
+                                        ) ? (
+                                          <AiFillLike
+                                            onClick={() =>
+                                              handleAnswerLike(temp.answer.id)
+                                            }
+                                            style={{
+                                              cursor: "pointer",
+                                            }}
+                                          ></AiFillLike>
+                                        ) : (
+                                          <AiOutlineLike
+                                            onClick={() =>
+                                              handleAnswerLike(temp.answer.id)
+                                            }
+                                            style={{
+                                              cursor: "pointer",
+                                            }}
+                                          ></AiOutlineLike>
+                                        )}
+
+                                        <small className=" ms-1 fw-bold">
+                                          {temp.likes}
+                                        </small>
+                                        <button
+                                          className="ms-3 btn fw-bold"
                                           onClick={() => {
-                                            console.log("heeeeerere");
-                                            let element =
-                                              document.getElementById(
-                                                `icon-${el.id}`
-                                              );
-                                            if (
-                                              element.style.display === "none"
-                                            ) {
-                                              element.style.display = "block";
+                                            if (appUser.id) {
+                                              console.log("heeeeerere");
+                                              let element =
+                                                document.getElementById(
+                                                  `miniRep-${temp.answer.id}`
+                                                );
+                                              if (
+                                                element.style.display === "none"
+                                              ) {
+                                                element.style.display = "block";
+                                              } else {
+                                                element.style.display = "none";
+                                              }
+                                              if (
+                                                temp.answer.appUser.userName !==
+                                                appUser.userName
+                                              )
+                                                document.getElementById(
+                                                  `miniReplyText-${temp.answer.id}`
+                                                ).defaultValue = `@${temp.answer.appUser.userName} `;
                                             } else {
-                                              element.style.display = "none";
+                                              Swal.fire(
+                                                "Please sign in your account!",
+                                                "",
+                                                "warning"
+                                              );
+                                              navigate("/log-in");
                                             }
                                           }}
-                                        ></AiOutlineSmile>
-
-                                        <div
-                                          id={`icon-${el.id}`}
-                                          style={{
-                                            position: "absolute",
-                                            display: "none",
-                                          }}
                                         >
-                                          <EmojiPicker
-                                            onEmojiClick={(
-                                              emojiData,
-                                              event
-                                            ) => {
-                                              document.getElementById(
-                                                `replyText-${el.id}`
-                                              ).value += emojiData.emoji;
-                                            }}
-                                            autoFocusSearch={false}
-                                            emojiStyle={EmojiStyle.NATIVE}
-                                          />
-                                        </div>
+                                          Reply
+                                        </button>
                                       </div>
-                                      <div className="d-flex align-items-start">
-                                        <button
-                                          className="btn"
-                                          onClick={() => {
-                                            setShowIcons(false);
-                                            document.getElementById(
-                                              `rep-${el.id}`
-                                            ).style.display = "none";
-                                            document.getElementById(
-                                              `replyText-${el.id}`
-                                            ).value = "";
-                                          }}
-                                        >
-                                          Cancel
-                                        </button>
-                                        <button
-                                          className="btn btn-outline-primary back-btn "
-                                          style={{ borderRadius: "100px" }}
-                                          onClick={() =>
-                                            handleSubmitReply(el.id)
-                                          }
-                                        >
-                                          Comment
-                                        </button>
+                                      <div
+                                        className="mini-reply-section p-0 m-0 my-3 w-100"
+                                        style={{
+                                          display: "none",
+                                        }}
+                                        id={`miniRep-${temp.answer.id}`}
+                                      >
+                                        <div className=" d-flex flex-column align-items-start w-100">
+                                          <div className=" d-flex align-items-center w-100">
+                                            <Avatar
+                                              name={
+                                                appUser.id
+                                                  ? appUser.userName
+                                                  : ""
+                                              }
+                                              round={true}
+                                              size="40"
+                                              className=" me-2"
+                                              color={randomColor}
+                                            />
+
+                                            <div className="d-flex w-100 flex-grow-1">
+                                              <TextareaAutosize
+                                                id={`miniReplyText-${temp.answer.id}`}
+                                                style={{
+                                                  width: "100%",
+                                                  border: "none",
+                                                  borderBottom:
+                                                    "1px solid black",
+                                                }}
+                                                className=" px-2 w-100 flex-grow-1"
+                                                onChange={(event) =>
+                                                  (document.getElementById(
+                                                    `miniReplyText-${temp.answer.id}`
+                                                  ).value = event.target.value)
+                                                }
+                                                defaultValue=""
+                                                placeholder="Add a reply..."
+                                              />
+                                            </div>
+                                          </div>
+
+                                          <div className=" d-flex  justify-content-between w-100 px-5 position-relative">
+                                            <div>
+                                              <AiOutlineSmile
+                                                size={25}
+                                                onClick={() => {
+                                                  console.log("heeeeerere");
+                                                  let element =
+                                                    document.getElementById(
+                                                      `miniIcon-${temp.answer.id}`
+                                                    );
+                                                  if (
+                                                    element.style.display ===
+                                                    "none"
+                                                  ) {
+                                                    element.style.display =
+                                                      "block";
+                                                  } else {
+                                                    element.style.display =
+                                                      "none";
+                                                  }
+                                                }}
+                                              ></AiOutlineSmile>
+
+                                              <div
+                                                id={`miniIcon-${temp.answer.id}`}
+                                                style={{
+                                                  position: "absolute",
+                                                  display: "none",
+                                                  zIndex: "999",
+                                                }}
+                                              >
+                                                <EmojiPicker
+                                                  onEmojiClick={(
+                                                    emojiData,
+                                                    event
+                                                  ) => {
+                                                    document.getElementById(
+                                                      `miniReplyText-${temp.answer.id}`
+                                                    ).value += emojiData.emoji;
+                                                  }}
+                                                  autoFocusSearch={false}
+                                                  emojiStyle={EmojiStyle.NATIVE}
+                                                />
+                                              </div>
+                                            </div>
+                                            <div className="d-flex align-items-start">
+                                              <button
+                                                className="btn"
+                                                onClick={() => {
+                                                  setShowIcons(false);
+                                                  document.getElementById(
+                                                    `miniRep-${temp.answer.id}`
+                                                  ).style.display = "none";
+                                                  document.getElementById(
+                                                    `miniReplyText-${temp.answer.id}`
+                                                  ).value = "";
+                                                }}
+                                              >
+                                                Cancel
+                                              </button>
+                                              <button
+                                                className="btn btn-outline-primary back-btn "
+                                                style={{
+                                                  borderRadius: "100px",
+                                                }}
+                                                onClick={() =>
+                                                  handleSubmitMiniReply(
+                                                    el.question.id,
+                                                    temp.answer.id
+                                                  )
+                                                }
+                                              >
+                                                Comment
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
-                            </div>
-                          </>
-                        );
-                      })}
+                                </>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      );
+                    })}
                 </section>
               </div>
             </div>
@@ -706,6 +1047,7 @@ export default function Details() {
                   {isFavorite.id ? (
                     <AiFillHeart
                       style={{
+                        cursor: "pointer",
                         width: "50px",
                         height: "50px",
                         color: "#bb37de",
@@ -716,6 +1058,7 @@ export default function Details() {
                   ) : (
                     <AiOutlineHeart
                       style={{
+                        cursor: "pointer",
                         width: "50px",
                         height: "50px",
                         color: "#bb37de",

@@ -58,7 +58,8 @@ public interface ICourseRepository extends JpaRepository<Course, Long> {
             "                       AND FIND_IN_SET(ct.id, :topics) " +
             "                       AND (c.price BETWEEN :priceStart AND :priceEnd) " +
             "                     GROUP BY c.id " +
-            "                     HAVING (:numOfRating = -1 OR (avg_rating >= :numOfRating AND avg_rating < :numOfRating + 1))) as sub) as finalSub" +
+            "                     HAVING (:numOfRating = -1 OR (avg_rating >= :numOfRating " +
+            "   AND avg_rating < :numOfRating + 1))) as sub) as finalSub" +
             " ORDER BY CASE WHEN :sortBy = 'newest' THEN finalSub.id" +
             "               WHEN :sortBy = 'rate' THEN finalSub.avg_rating" +
             "               WHEN :sortBy = 'review' THEN finalSub.numOfRating" +

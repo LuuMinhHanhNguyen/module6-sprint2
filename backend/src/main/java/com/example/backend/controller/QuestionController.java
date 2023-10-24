@@ -16,8 +16,9 @@ public class QuestionController {
     private IQuestionService iQuestionService;
 
     @GetMapping("/all")
-    public ResponseEntity getAllQuestion(@RequestParam("courseId") Long courseId){
-        return new ResponseEntity(iQuestionService.findAllByCourse_Id(courseId), HttpStatus.OK);
+    public ResponseEntity getAllQuestion(@RequestParam("courseId") Long courseId,
+                                         @RequestParam("sortBy") String sortBy){
+        return new ResponseEntity(iQuestionService.findAllByCourse_Id(courseId,sortBy), HttpStatus.OK);
     }
 
 
