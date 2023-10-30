@@ -1,5 +1,4 @@
-
--- app-user (instructors)
+-- app-user (instructors/students)
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (1, false, '$2a$10$N0GMVvmzyaubGWL0mBEPTO9rFoH/uEOzBIXdsm3PK1P7AEwmDn/4C', 'keith', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (2, false, '$2a$10$GCQVEYJpjz1IT.SYAFIA4udB5KKgQqUCNz8EiOR7PTadaCD6N.Pqm', 'jojitheinstructor', 2);
 INSERT INTO thecoach.app_user (id, flag_deleted, password, user_name, app_role_id) VALUES (3, false, '$2a$10$1l0JSkXRX1Rw.dlgNOsk8egUgoKjx4XYL/dEe3v1tyqSlSAILAhCq', 'tiffanitheinstructor', 2);

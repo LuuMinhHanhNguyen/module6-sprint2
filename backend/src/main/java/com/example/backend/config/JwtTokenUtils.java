@@ -91,7 +91,12 @@ public class JwtTokenUtils implements Serializable {
     public String generateToken(Map<String, Object> claims,
                                    UserDetails userDetails
                                    ) {
-        return Jwts.builder()
+
+        Map<String, Object> maps = new HashMap<>();
+        maps.put("hihi", new String("hihihi"));
+
+        return Jwts
+                .builder()
                 .setClaims(claims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))

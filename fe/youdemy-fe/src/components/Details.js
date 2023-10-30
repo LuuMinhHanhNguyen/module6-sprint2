@@ -279,7 +279,6 @@ export default function Details() {
     } else {
       const data = await saveQuestionLike(appUser.id, questionId);
       setIsUpdated(!isUpdated);
-      Swal.fire("Thank You For Your Liking! ❤️ ", "", "success");
     }
   };
 
@@ -290,7 +289,6 @@ export default function Details() {
     } else {
       const data = await saveAnswerLike(appUser.id, answerId);
       setIsUpdated(!isUpdated);
-      Swal.fire("Thank You For Your Liking! ❤️ ", "", "success");
     }
   };
 
@@ -550,6 +548,7 @@ export default function Details() {
                         <div className=" position-relative">
                           <div className=" position-absolute">
                             <AiOutlineSmile
+                              style={{ cursor: "pointer" }}
                               size={25}
                               onClick={() => setShowIcons((prev) => !prev)}
                             ></AiOutlineSmile>
@@ -697,6 +696,7 @@ export default function Details() {
                                 <div className=" d-flex  justify-content-between w-100 px-5 position-relative">
                                   <div>
                                     <AiOutlineSmile
+                                      style={{ cursor: "pointer" }}
                                       size={25}
                                       onClick={() => {
                                         console.log("heeeeerere");
@@ -890,6 +890,7 @@ export default function Details() {
                                           <div className=" d-flex  justify-content-between w-100 px-5 position-relative">
                                             <div>
                                               <AiOutlineSmile
+                                                style={{ cursor: "pointer" }}
                                                 size={25}
                                                 onClick={() => {
                                                   console.log("heeeeerere");
