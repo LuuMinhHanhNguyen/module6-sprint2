@@ -12,6 +12,10 @@ import { axiosClient } from "./service/AxiosClient";
 import MyLearning from "./components/MyLearning";
 import PaginatedItems from "./components/PaginatedItems";
 import PurchaseHistory from "./components/PurchaseHistory";
+import VideoCall from "./components/VideoCall";
+import Container from "./components/Container";
+import RTC from "./components/RTC";
+import WaitingRoom from "./components/WaitingRoom";
 
 function App() {
   axiosClient();
@@ -28,6 +32,7 @@ function App() {
         <Route path="/my-learning" element={<MyLearning />}></Route>
         <Route path="/search" element={<PaginatedItems />}></Route>
         <Route path="/purchase-history" element={<PurchaseHistory />}></Route>
+        <Route path="/video-call" element={<WaitingRoom />}></Route>
       </Routes>
     </>
   );

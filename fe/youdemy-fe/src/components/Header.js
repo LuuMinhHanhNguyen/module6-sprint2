@@ -130,7 +130,7 @@ export default function Header(props) {
                   <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <a href="#">About</a>
+                  <Link to="/video-call">VideoCall</Link>
                 </li>
 
                 {/* Dropdown */}

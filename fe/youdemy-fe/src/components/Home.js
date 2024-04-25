@@ -1,11 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "../css/bootstrap.css";
-import "../css/linearicons.css";
-import "../css/font-awesome.min.css";
-import "../css/bootstrap.css";
-import "../css/magnific-popup.css";
-import "../css/owl.carousel.css";
-import "../css/hexagons.min.css";
 import "../css/main.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -70,8 +63,6 @@ export default function Home() {
     console.log(data);
   };
 
- 
-
   const handleHeartClick = async (courseId) => {
     if (appUser.id) {
       const data = await addToFavorites(appUser.id, courseId);
@@ -104,8 +95,6 @@ export default function Home() {
   useEffect(() => {
     loadAllCourses();
   }, []);
-
- 
 
   useEffect(() => {
     if (appUser.id) {
