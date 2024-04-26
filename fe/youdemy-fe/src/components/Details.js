@@ -1097,9 +1097,9 @@ export default function Details() {
                       <h6 className=" m-0 me-3 fw-bold">Your Rating: </h6>
                       <input id="rating-star" value="0" type="hidden"></input>
                       <ReactStars
+                        // className="star-gap"
+                        // style={{ marginRight: "10px" }}
                         {...secondExample}
-                        className="star-gap"
-                        style={{ marginRight: "10px" }}
                       />
                     </div>
                   </div>
